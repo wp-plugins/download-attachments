@@ -4,7 +4,7 @@ Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip,
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 1.0.0
+Stable tag: 1.0.0.1
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -12,7 +12,7 @@ Download Attachments is a new approach to managing downloads in WordPress. It al
 
 == Description ==
 
-[Download Attachments](http://www.dfactory.eu/plugins/download-attachments/) is a new approach to managing downloads in WordPress. Instead of bloated interface it enables a simple, drag & drop and AJAX driven metabox where you can insert and manage your Media Library files and automatically or manually display them after, before or inside posts content.
+[Download Attachments](http://www.dfactory.eu/plugins/download-attachments/) is a new approach to managing downloads in WordPress. Instead of bloated interface it enables simple, drag & drop and AJAX driven metabox where you can insert and manage your Media Library files and automatically or manually display them after, before or inside posts content.
 
 For more information, check out plugin page at [dFactory](http://www.dfactory.eu/) site.
 
@@ -30,7 +30,7 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 * Option to select from all Media Library files or only those attached to a post
 * 2 shortcodes
 * 5 functions and multiple filter hooks for developers
-* Option to use caption and/or description for download links
+* Option to use attachment caption and/or description for download links description
 * Compatible with WPML & Polylang
 * .pot file for translations included
 
@@ -52,7 +52,7 @@ No questions yet.
 
 1. screenshot-1.png
 2. screenshot-2.png
-3. screenshot-2.png
+3. screenshot-3.png
 
 == Changelog ==
 
