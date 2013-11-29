@@ -1,0 +1,9 @@
+/* Download attachments */
+.download_attachments .download_title { font-size: 1.35em; border-bottom: 1px dotted #ccc; padding-bottom: 0.5em; display: block; }
+.download_attachments ul { list-style: none; padding:0; margin:0; }
+.download_attachments ul li { margin: 0.5em 0; border-bottom: 1px dotted #eee; padding-bottom: 0.5em; }
+.download_attachments img { padding-right: 1em; vertical-align: middle; }
+.download_attachments br { display: block; height: 0; }
+.download_attachments .attachment_description { font-style: italic; }
+.attachment_label { font-weight: normal; }
+.attachment_date, .attachment_user, .attachment_size, .attachment_downloads { font-weight: bold; }
