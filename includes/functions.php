@@ -148,7 +148,7 @@ function da_display_download_attachments($post_id = 0, $args = array())
 
 	$defaults = array(
 		'container' => 'div',
-		'container_class' => 'download_attachments',
+		'container_class' => 'download-attachments',
 		'container_id' => '',
 		'style' => 'list',
 		'link_before' => '',
@@ -189,9 +189,6 @@ function da_display_download_attachments($post_id = 0, $args = array())
 	$args['link_after'] = trim($args['link_after']);
 	$args['display_option_none'] = (($info = trim($args['display_option_none'])) !== '' ? $info : $defaults['display_option_none']);
 
-	if($options['label'] !== '')
-		$args['title'] = $options['label'];
-
 	$args['title'] = apply_filters('da_display_attachments_title', trim($args['title']));
 
 	$attachments = da_get_download_attachments(
@@ -211,12 +208,12 @@ function da_display_download_attachments($post_id = 0, $args = array())
 	if(!($args['display_empty'] === 0 && $count === 0))
 	{
 		//start container
-		$html .= '
-			<'.$args['container'].($args['container_id'] !== '' ? ' id="'.$args['container_id'].'"' : '').($args['container_class'] !== '' ? ' class="'.$args['container_class'].'"' : '').'>';
+		if($args['container'] !== '')
+			$html .= '<'.$args['container'].($args['container_id'] !== '' ? ' id="'.$args['container_id'].'"' : '').($args['container_class'] !== '' ? ' class="'.$args['container_class'].'"' : '').'>';
 
 		//title
 		if($args['title'] !== '')
-			$html .= ($args['title'] !== '' ? '<span class="download_title">'.$args['title'].'</span><br />' : '');
+			$html .= ($args['title'] !== '' ? '<p class="download-title">'.$args['title'].'</p>' : '');
 	}
 
 	if($count > 0)
@@ -232,62 +229,62 @@ function da_display_download_attachments($post_id = 0, $args = array())
 
 			//start style
 			if($args['style'] === 'list')
-				$html .= ($i === 1 ? '<ul>' : '').'<li>';
+				$html .= ($i === 1 ? '<ul>' : '').'<li class="'.$attachment['attachment_type'].'">';
 			else
-				$html .= '<p>';
+				$html .= '<span class="'.$attachment['attachment_type'].'">';
 
 			//type
 			if($args['display_icon'] === 1)
-				$html .= '<img class="icon" src="'.$attachment['attachment_icon_url'].'" alt="'.$attachment['attachment_type'].'" /> ';
+				$html .= '<img class="attachment-icon" src="'.$attachment['attachment_icon_url'].'" alt="'.$attachment['attachment_type'].'" /> ';
 
 			//link before
 			if($args['link_before'] !== '')
-				$html .= '<span class="link_before">'.$args['link_before'].'</span>';
+				$html .= '<span class="attachment-link-before">'.$args['link_before'].'</span>';
 
 			//link
 			$html .= '<a href="'.($options['pretty_urls'] === TRUE ? site_url('/'.$options['download_link'].'/'.$attachment['attachment_id'].'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment['attachment_id'])).'" title="'.$title.'">'.$title.'</a>';
 
 			//link after
 			if($args['link_after'] !== '')
-				$html .= '<span class="link_after">'.$args['link_after'].'</span>';
+				$html .= '<span class="attachment-link-after">'.$args['link_after'].'</span>';
 
 			$html .= '<br />';
 
 			//caption
 			if($args['display_caption'] === 1 && $attachment['attachment_caption'] !== '')
-				$html .= '<span class="attachment_caption">'.$attachment['attachment_caption'].'</span><br />';
+				$html .= '<span class="attachment-caption">'.$attachment['attachment_caption'].'</span><br />';
 
 			//description
 			if($args['display_description'] === 1 && $args['use_desc_for_title'] === 0 && $attachment['attachment_description'] !== '')
-				$html .= '<span class="attachment_description">'.$attachment['attachment_description'].'</span><br />';
+				$html .= '<span class="attachment-description">'.$attachment['attachment_description'].'</span><br />';
 
 			//date
 			if($args['display_date'] === 1)
-				$html .= '<span class="attachment_date"><span class="attachment_label">'.__('Date added', 'download-attachments').':</span> '.$attachment['attachment_date'].'</span> '; 
+				$html .= '<span class="attachment-date"><span class="attachment-label">'.__('Date added', 'download-attachments').':</span> '.$attachment['attachment_date'].'</span> '; 
 
 			//user
 			if($args['display_user'] === 1)
-				$html .= '<span class="attachment_user"><span class="attachment_label">'.__('Added by', 'download-attachments').':</span> '.$attachment['attachment_user_name'].'</span> '; 
+				$html .= '<span class="attachment-user"><span class="attachment-label">'.__('Added by', 'download-attachments').':</span> '.$attachment['attachment_user_name'].'</span> '; 
 
 			//size
 			if($args['display_size'] === 1)
-				$html .= '<span class="attachment_size"><span class="attachment_label">'.__('Attachment size', 'download-attachments').':</span> '.$attachment['attachment_size'].'</span> '; 
+				$html .= '<span class="attachment-size"><span class="attachment-label">'.__('Attachment size', 'download-attachments').':</span> '.$attachment['attachment_size'].'</span> '; 
 
 			//downloads
 			if($args['display_count'] === 1)
-				$html .= '<span class="attachment_downloads"><span class="attachment_label">'.__('Downloads', 'download-attachments').':</span> '.$attachment['attachment_downloads'].'</span> '; 
+				$html .= '<span class="attachment-downloads"><span class="attachment-label">'.__('Downloads', 'download-attachments').':</span> '.$attachment['attachment_downloads'].'</span> '; 
 
 			//end style
 			if($args['style'] === 'list')
 				$html .= '</li>'.($i++ === $count ? '</ul>' : '');
 			else
-				$html .= '</p>';
+				$html .= '</span>';
 		}
 	}
 	elseif($args['display_empty'] === 1)
 		$html .= $args['display_option_none'];
 
-	if(!($args['display_empty'] === 0 && $count === 0))
+	if(!($args['display_empty'] === 0 && $count === 0) && $args['container'] !== '')
 		$html .= '</'.$args['container'].'>';
 
 	if($args['echo'] === 1)

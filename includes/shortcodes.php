@@ -40,7 +40,7 @@ class Download_Attachments_Shortcodes
 	{
 		$defaults = array(
 			'container' => 'div',
-			'container_class' => 'download_attachments',
+			'container_class' => 'download-attachments',
 			'container_id' => '',
 			'style' => 'list',
 			'link_before' => '',
@@ -62,9 +62,17 @@ class Download_Attachments_Shortcodes
 			'order' => 'asc',
 			'echo' => 1
 		);
-		
+
 		//we have to force return in shortcodes
 		$args['echo'] = 0;
+
+		if(!isset($args['title']))
+		{
+			$args['title'] = '';
+
+			if($this->options['general']['label'] !== '')
+			$args['title'] = $this->options['general']['label'];
+		}
 
 		return da_display_download_attachments((int)get_queried_object_id(), shortcode_atts($defaults, $args));
 	}

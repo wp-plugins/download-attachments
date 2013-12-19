@@ -2,407 +2,385 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Download Attachments\n"
 "POT-Creation-Date: 2013-11-26 19:48+0100\n"
-"PO-Revision-Date: 2013-11-26 19:50+0100\n"
-"Last-Translator: Bartosz Arendt <info@digitalfactory.pl>\n"
+"PO-Revision-Date: 2013-12-19 14:16+0200\n"
+"Last-Translator: \n"
 "Language-Team: dFactory <info@dfactory.pl>\n"
-"Language: Polish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-KeywordsList: gettext;gettext_noop;__;_e;esc_attr__;esc_attr_e;"
 "_n:1,2;_x:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: el\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../download-attachments.php:259
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: ../download-attachments.php:260 ../includes/functions.php:270
 msgid "Added by"
-msgstr "Dodany przez"
+msgstr "Προστέθηκε από"
 
 #: ../download-attachments.php:261
 msgid "Title"
-msgstr "Tytuł"
+msgstr "Τίτλος"
 
 #: ../download-attachments.php:262
 msgid "File type"
-msgstr "Typ pliku"
+msgstr "Τύπος αρχείου"
 
 #: ../download-attachments.php:263
 msgid "Icon"
-msgstr "Ikona"
+msgstr "Εικόνα"
 
 #: ../download-attachments.php:264
 msgid "Size"
-msgstr "Rozmiar"
+msgstr "Μέγεθος"
 
 #: ../download-attachments.php:265 ../includes/functions.php:266
 msgid "Date added"
-msgstr "Data dodania"
+msgstr "Ημερομηνία προσθήκης"
 
 #: ../download-attachments.php:266 ../includes/functions.php:278
 #: ../includes/media.php:55
 msgid "Downloads"
-msgstr "Pobrania"
+msgstr "Λήψεις"
 
 #: ../download-attachments.php:362
 msgid "Are you sure you want to reset these settings to defaults?"
-msgstr "Jesteś pewny, że chcesz zresetować ustawienia do domyślnych?"
+msgstr ""
 
 #: ../download-attachments.php:363
 msgid "Are you sure you want to reset number of downloads of all attachments?"
 msgstr ""
-"Jesteś pewny, że chcesz zresetować liczbę pobrań dla wszystkich załączników?"
 
 #: ../download-attachments.php:379
 msgid "Select Attachments"
-msgstr "Wybierz załączniki"
+msgstr "Επιλογή συννημένων"
 
 #: ../download-attachments.php:380
 msgid "Edit attachment"
-msgstr "Edytuj załącznik"
+msgstr "Επεξεργασία συννημένων"
 
 #: ../download-attachments.php:381
 msgid "Add selected attachments"
-msgstr "Dodaj zaznaczone załączniki"
+msgstr "Προσθήκη επιλεγμένων συννημένων"
 
 #: ../download-attachments.php:382
 msgid "Save attachment"
-msgstr "Zapisz załącznik"
+msgstr "Αποθήκευση συννημένου"
 
 #: ../download-attachments.php:383 ../includes/metabox.php:503
 msgid "No attachments added yet."
-msgstr "Nie dodano jeszcze żadnych załączników."
+msgstr "Δεν έχουν προστεθεί συννημένα"
 
 #: ../download-attachments.php:384
 msgid "Do you want to remove this attachment?"
-msgstr "Jesteś pewny, że chcesz usunąć ten załącznik?"
+msgstr "Θέλετε να αφαιρέσετε αυτό το συννημένο;"
 
 #: ../download-attachments.php:385 ../includes/metabox.php:466
 msgid "Remove"
-msgstr "Usuń"
+msgstr "Διαγραφή"
 
 #: ../download-attachments.php:386 ../includes/metabox.php:461
 #: ../includes/metabox.php:464
 msgid "Edit"
-msgstr "Edytuj"
+msgstr "Επεξεργασία"
 
 #: ../download-attachments.php:388 ../includes/metabox.php:179
 #: ../includes/metabox.php:226 ../includes/metabox.php:268
 #: ../includes/metabox.php:271
 msgid "Unexpected error occured. Please refresh the page and try again."
 msgstr ""
-"Wystąpił nieoczekiwany błąd. Proszę odświeżyć stronę i spróbować ponownie."
+"Συνέβη κάποιο λάθος. Παρακαλώ ανανεώστε τη σελίδα και προσπαθήστε ξανα."
 
 #: ../download-attachments.php:445
 msgid "Support"
-msgstr "Pomoc"
+msgstr "Υποστήριξη"
 
 #: ../download-attachments.php:467
 msgid "Settings"
-msgstr "Ustawienia"
+msgstr "Ρυθμίσεις"
 
 #: ../includes/functions.php:164 ../includes/shortcodes.php:56
 msgid "No attachments to download"
-msgstr "Brak załączników do pobrania"
+msgstr "Κάνενα συννημένο για λήψη"
 
 #: ../includes/functions.php:168 ../includes/metabox.php:307
 #: ../includes/settings.php:102 ../includes/settings.php:103
 #: ../includes/settings.php:118 ../includes/settings.php:144
 #: ../includes/shortcodes.php:60
 msgid "Download Attachments"
-msgstr "Załączniki do pobrania"
+msgstr "Λήψη συννημένων"
 
 #: ../includes/functions.php:274
 msgid "Attachment size"
-msgstr "Rozmiar załącznika"
+msgstr "Μέγεθος αρχείου"
 
 #: ../includes/metabox.php:261
 msgid "Order of attachments has been changed but some of them no longer exists"
 msgstr ""
-"Kolejność załączników została zmienione, ale niektóre z nich już nie istnieją"
 
 #: ../includes/metabox.php:329
 msgid "Add new attachment"
-msgstr "Dodaj nowy załącznik"
+msgstr "Προσθήκη νέου συννημένου"
 
 #: ../includes/metabox.php:424
 msgid "Actions"
-msgstr "Działania"
+msgstr ""
 
 #: ../includes/settings.php:55
 msgid "Enable"
-msgstr "Włącz"
+msgstr "Ενεργοποίηση"
 
 #: ../includes/settings.php:56
 msgid "Disable"
-msgstr "Wyłącz"
+msgstr "Απενοργοποίηση"
 
 #: ../includes/settings.php:60
 msgid "All files"
-msgstr "Wszystkie załączniki"
+msgstr "Όλα τα αρχεία"
 
 #: ../includes/settings.php:61
 msgid "Attached to a post only"
-msgstr "Tylko załączone do danego wpisu"
+msgstr "Επισύναψη σε άρθρο μόνο"
 
 #: ../includes/settings.php:65
 msgid "Manage download attachments"
-msgstr "Zarządzanie załącznikami do pobrania"
+msgstr ""
 
 #: ../includes/settings.php:69 ../includes/settings.php:177
 msgid "Media Library"
-msgstr "Biblioteka mediów"
+msgstr ""
 
 #: ../includes/settings.php:70
 msgid "Modal"
-msgstr "Okno modal"
+msgstr ""
 
 #: ../includes/settings.php:74
 msgid "before the content"
-msgstr "przed treścią"
+msgstr ""
 
 #: ../includes/settings.php:75
 msgid "after the content"
-msgstr "po treści"
+msgstr ""
 
 #: ../includes/settings.php:76
 msgid "manually"
-msgstr "ręcznie"
+msgstr ""
 
 #: ../includes/settings.php:80
 msgid "caption"
-msgstr "podpis"
+msgstr ""
 
 #: ../includes/settings.php:81
 msgid "description"
-msgstr "opis"
+msgstr ""
 
 #: ../includes/settings.php:133
 msgid "Reset to defaults"
-msgstr "Reset do domyślnych"
+msgstr ""
 
 #: ../includes/settings.php:137
 msgid "Reset downloads"
-msgstr "Reset ilości pobrań"
+msgstr ""
 
 #: ../includes/settings.php:146
 msgid "Need support?"
-msgstr "Potrzebujesz pomocy?"
+msgstr ""
 
 #: ../includes/settings.php:147
 msgid ""
 "If you are having problems with this plugin, please talk about them in the"
-msgstr "Jeśli masz jakiekolwiek problemy z tą wtyczą, napisz o nich na"
+msgstr ""
 
 #: ../includes/settings.php:147
 msgid "Support forum"
-msgstr "Forum pomocy"
+msgstr ""
 
 #: ../includes/settings.php:149
 msgid "Do you like this plugin?"
-msgstr "Lubisz tę wtyczkę?"
+msgstr ""
 
 #: ../includes/settings.php:150
 msgid "Rate it 5"
-msgstr "Oceń ją na 5"
+msgstr ""
 
 #: ../includes/settings.php:150
 msgid "on WordPress.org"
-msgstr "na WordPress.org"
+msgstr ""
 
 #: ../includes/settings.php:151
 msgid "Blog about it & link to the"
-msgstr "Napisz o niej i dodaj link do"
+msgstr ""
 
 #: ../includes/settings.php:151
 msgid "plugin page"
-msgstr "strony wtyczki"
+msgstr ""
 
 #: ../includes/settings.php:152
 msgid "Check out our other"
-msgstr "Sprawdź nasze inne"
+msgstr ""
 
 #: ../includes/settings.php:152
 msgid "WordPress plugins"
-msgstr "wtyczki do WordPressa"
+msgstr ""
 
 #: ../includes/settings.php:155
 msgid "Created by"
-msgstr "Stworzone przez"
+msgstr "Δημιουργός"
 
 #: ../includes/settings.php:170
 msgid "General settings"
-msgstr "Ustawienia ogólne"
+msgstr ""
 
 #: ../includes/settings.php:171
 msgid "Label"
-msgstr "Nazwa"
+msgstr ""
 
 #: ../includes/settings.php:172
 msgid "Capabilities"
-msgstr "Uprawnienia"
+msgstr ""
 
 #: ../includes/settings.php:173
 msgid "Supported Post Types"
-msgstr "Typy wpisów"
+msgstr ""
 
 #: ../includes/settings.php:174
 msgid "Backend Display"
-msgstr "Wyświetlanie w admin"
+msgstr ""
 
 #: ../includes/settings.php:175
 msgid "Backend Downloads Description"
-msgstr "Opis załączników do pobrania w admin"
+msgstr ""
 
 #: ../includes/settings.php:176
 msgid "Edit attachment link"
-msgstr "Link do edycji załącznika"
+msgstr ""
 
 #: ../includes/settings.php:178
 msgid "Downloads in Media Library"
-msgstr "Pobrania w Bibliotece mediów"
+msgstr ""
 
 #: ../includes/settings.php:179
 msgid "Frontend Display"
-msgstr "Wyświetlanie na stronie"
+msgstr ""
 
 #: ../includes/settings.php:180
 msgid "Frontend Downloads Description"
-msgstr "Opis załączników na stronie"
+msgstr ""
 
 #: ../includes/settings.php:181
 msgid "Use CSS style"
-msgstr "Użyj stylu CSS"
+msgstr ""
 
 #: ../includes/settings.php:182
 msgid "Pretty URLs"
-msgstr "Przyjazne linki"
+msgstr ""
 
 #: ../includes/settings.php:183
 msgid "Downloads List Display"
-msgstr "Wyświetlanie listy załączników"
+msgstr ""
 
 #: ../includes/settings.php:184
 msgid "Deactivation"
-msgstr "Deaktywacja"
+msgstr ""
 
 #: ../includes/settings.php:196
 msgid "Enter download attachments list label."
-msgstr "Podaj nazwę dla listy załączników do pobrania."
+msgstr ""
 
 #: ../includes/settings.php:217
 msgid "Select which post types would you like to enable for your downloads."
 msgstr ""
-"Wybierz typy wpisów dla których chesz włączyć możliwość pobierania "
-"załączników."
 
 #: ../includes/settings.php:239
 msgid ""
 "Select which columns would you like to enable on backend for your downloads."
 msgstr ""
-"Wybierz kolumny, jakie mają być widoczne w załącznikach do pobrania w panelu "
-"administracyjnym."
 
 #: ../includes/settings.php:261
 msgid ""
 "Select which columns would you like to enable on frontend for your downloads."
 msgstr ""
-"Wybierz kolumny, jakie mają być widoczne w załącznikach do pobrania na "
-"stronie."
 
 #: ../includes/settings.php:282
 msgid "Select if you'd like to use bultin CSS style."
-msgstr "Wybierz czy chcesz używać wbudowanego stylu CSS."
+msgstr ""
 
 #: ../includes/settings.php:303
 msgid "Enable if you want to use pretty URLs."
-msgstr "Włącz tę opcję, jeśli chesz korzystać z przyjaznych odnośników."
+msgstr ""
 
 #: ../includes/settings.php:305
 msgid "Slug"
-msgstr "Bezpośredni odnośnik"
+msgstr ""
 
 #: ../includes/settings.php:309
 msgid "Download link slug."
-msgstr "Bezpośredni odnośnik do pobierania"
+msgstr ""
 
 #: ../includes/settings.php:332
 msgid "Select where you would like your download attachments to be displayed."
-msgstr "Wybierz w którym miejscu chciałbyś wyświetlić załączniki do pobrania."
+msgstr ""
 
 #: ../includes/settings.php:353
 msgid ""
 "Select what fields to use on backend for download attachments description."
 msgstr ""
-"Wybierz jakie pola zostaną zastosowane jako opis załącznika do pobrania w "
-"panelu administracyjnym."
 
 #: ../includes/settings.php:374
 msgid ""
 "Select what fields to use on frontend for download attachments description."
 msgstr ""
-"Wybierz jakie pola zostaną zastosowane jako opis załącznika do pobrania na "
-"stronie."
 
 #: ../includes/settings.php:395
 msgid "Select where you would like to edit download attachments."
-msgstr "Wybierz gdzie chciałbyś edytować załączniki."
+msgstr ""
 
 #: ../includes/settings.php:416
 msgid "Select which attachments should be visible in Media Library window."
 msgstr ""
-"Wybierz, jakie załączniki mają być widoczne w oknie Biblioteki Mediów "
-"trakcie dodawania załącznika do pobrania."
 
 #: ../includes/settings.php:437
 msgid ""
 "Enable if you want to display downloads count in your Media Library columns."
 msgstr ""
-"Włącz tę opcję jeśli chcesz wyświetlić liczbę pobrań załączników w kolumnie "
-"w Bibliotece Mediów."
 
 #: ../includes/settings.php:456
 msgid "Role"
-msgstr "Rola"
+msgstr ""
 
 #: ../includes/settings.php:461
 msgid "None"
-msgstr "Brak"
+msgstr ""
 
 #: ../includes/settings.php:493
 msgid ""
 "Select user roles allowed to add, remove and manage Download Attachments."
 msgstr ""
-"Wybierz role użytkowników, którzy będą mogli dodawać, usuwać i edytować "
-"Załączniki do pobrania."
 
 #: ../includes/settings.php:516
 msgid "Enable if you want all plugin data to be deleted on deactivation."
 msgstr ""
-"Włącz tę opcję, jeśli chcesz usunąć wszystkie dane wtyczki po jej "
-"deaktywacji."
 
 #: ../includes/settings.php:667
 msgid "Settings restored to defaults."
-msgstr "Ustawienia zostały zresetowane do domyślnych."
+msgstr ""
 
 #: ../includes/settings.php:685
 msgid "An error occurred while resetting the number of downloads."
-msgstr "W trakcie resetowania liczby pobrań wystąpił nieoczekiwany błąd."
+msgstr ""
 
 #: ../includes/settings.php:687
 msgid "Number of downloads of all attachments has been reset."
-msgstr "Liczba pobrań wszystkich załączników została zresetowana."
+msgstr ""
 
-#~ msgid ""
-#~ "This is an auto-draft. You can not add attachments here. Please save your "
-#~ "post first."
-#~ msgstr ""
-#~ "To jest automatycznie zapisany szkic. Nie możesz dodawać załączników do "
-#~ "momentu zapisania wpisu."
+msgid ""
+"This is an auto-draft. You can not add attachments here. Please save your "
+"post first."
+msgstr ""
