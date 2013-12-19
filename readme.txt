@@ -4,7 +4,7 @@ Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip,
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 1.0.1
+Stable tag: 1.0.2.1
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -57,8 +57,8 @@ No questions yet.
 
 == Changelog ==
 
-= 1.0.1 =
-* New: Italian translation, thanks to vas gargan
+= 1.0.2 =
+* New: Greek translation, thanks to vas gargan
 * Fix: Attachments box cutsom title not working
 * Tweak: Added file type classes for attachments list
 
@@ -67,7 +67,7 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-* New: Italian translation, thanks to vas gargan
+= 1.0.2 =
+* New: Greek translation, thanks to vas gargan
 * Fix: Attachments box cutsom title not working
 * Tweak: Added file type classes for attachments list
