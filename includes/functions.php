@@ -10,8 +10,8 @@ function da_get_download_attachments($post_id = 0, $args = array())
 	}
 
 	$defaults = array(
-		'include' => '',
-		'exclude' => '',
+		'include' => array(),
+		'exclude' => array(),
 		'orderby' => 'menu_order',
 		'order' => 'asc'
 	);
@@ -31,7 +31,9 @@ function da_get_download_attachments($post_id = 0, $args = array())
 		$args['include'] = $ids;
 	}
 	elseif(is_numeric($args['include']))
-		$args['include'] = (int)$args['include'];
+		$args['include'] = array((int)$args['include']);
+	elseif(is_string($args['include']) && !empty($args['include']))
+		$args['include'] = json_decode('['.$args['include'].']', TRUE);
 	else
 	{
 		$args['include'] = $defaults['include'];
@@ -49,7 +51,9 @@ function da_get_download_attachments($post_id = 0, $args = array())
 			$args['exclude'] = $ids;
 		}
 		elseif(is_numeric($args['exclude']))
-			$args['exclude'] = (int)$args['exclude'];
+			$args['exclude'] = array((int)$args['exclude']);
+		elseif(is_string($args['exclude']) && !empty($args['exclude']))
+			$args['exclude'] = json_decode('['.$args['exclude'].']', TRUE);
 		else
 			$args['exclude'] = $defaults['exclude'];
 	}
@@ -64,13 +68,33 @@ function da_get_download_attachments($post_id = 0, $args = array())
 	{
 		foreach($files_meta as $file)
 		{
-			$files[$file['file_id']] = array(
-				'attachment_id' => $file['file_id'],
-				'attachment_date' => $file['file_date'],
-				'attachment_user_id' => $file['file_user_id'],
-				'attachment_user_name' => get_the_author_meta('display_name', $file['file_user_id']),
-				'attachment_downloads' => (int)get_post_meta($file['file_id'], '_da_downloads', TRUE)
-			);
+			$add = FALSE;
+
+			//all
+			if(empty($args['include']) && empty($args['exclude']))
+				$add = TRUE;
+			//include
+			elseif(!empty($args['include']) && empty($args['exclude']) && in_array($file['file_id'], $args['include']))
+				$add = TRUE;
+			//exclude
+			elseif(empty($args['include']) && !empty($args['exclude']))
+			{
+				$add = TRUE;
+
+				if(in_array($file['file_id'], $args['exclude']))
+					$add = FALSE;
+			}
+
+			if($add === TRUE)
+			{
+				$files[$file['file_id']] = array(
+					'attachment_id' => $file['file_id'],
+					'attachment_date' => $file['file_date'],
+					'attachment_user_id' => $file['file_user_id'],
+					'attachment_user_name' => get_the_author_meta('display_name', $file['file_user_id']),
+					'attachment_downloads' => (int)get_post_meta($file['file_id'], '_da_downloads', TRUE)
+				);
+			}
 		}
 
 		$args['include'] = array_keys($files);
@@ -79,7 +103,6 @@ function da_get_download_attachments($post_id = 0, $args = array())
 	$files_data = get_posts(
 		array(
 			'include' => $args['include'],
-			'exclude' => $args['exclude'],
 			'posts_per_page' => -1,
 			'offset' => 0,
 			'orderby' => 'post_date',
@@ -182,7 +205,7 @@ function da_display_download_attachments($post_id = 0, $args = array())
 	$args['display_empty'] = apply_filters('da_display_attachments_empty', (int)$args['display_empty']);
 	$args['use_desc_for_title'] = (int)$args['use_desc_for_title'];
 	$args['echo'] = (int)$args['echo'];
-	$args['style'] = (in_array($args['style'], array('list', 'none'), TRUE) ? $args['style'] : $defaults['style']);
+	$args['style'] = (in_array($args['style'], array('list', 'none', ''), TRUE) ? $args['style'] : $defaults['style']);
 	$args['orderby'] = (in_array($args['orderby'], array('menu_order', 'attachment_id', 'attachment_date', 'attachment_title', 'attachment_size', 'attachment_downloads'), TRUE) ? $args['orderby'] : $defaults['orderby']);
 	$args['order'] = (in_array($args['order'], array('asc', 'desc'), TRUE) ? $args['order'] : $defaults['order']);
 	$args['link_before'] = trim($args['link_before']);
@@ -193,7 +216,9 @@ function da_display_download_attachments($post_id = 0, $args = array())
 
 	$attachments = da_get_download_attachments(
 		$post_id,
-		apply_filters('da_display_attachments_args', array(
+		apply_filters(
+			'da_display_attachments_args',
+			array(
 				'include' => $args['include'],
 				'exclude' => $args['exclude'],
 				'orderby' => $args['orderby'],
