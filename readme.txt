@@ -4,7 +4,7 @@ Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip,
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -38,6 +38,7 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 
 * Greek - by vas gargan
 * Polish - by Bartosz Arendt
+* Russian - by Semion Zuev
 
 == Installation ==
 
@@ -57,6 +58,10 @@ No questions yet.
 
 == Changelog ==
 
+= 1.0.4 =
+* New: Russian translation, thanks to Semion Zuev
+* Tweak: Greek translation updated
+
 = 1.0.3 =
 * Fix: Include & exclude attributes not working for download-attachments shortcode
 
@@ -70,5 +75,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.3 =
-* Fix: Include & exclude attributes not working for download-attachments shortcode
+= 1.0.4 =
+* New: Russian translation, thanks to Semion Zuev, Greek translation updated

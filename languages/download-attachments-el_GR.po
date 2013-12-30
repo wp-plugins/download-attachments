@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Download Attachments\n"
 "POT-Creation-Date: 2013-11-26 19:48+0100\n"
-"PO-Revision-Date: 2013-12-19 14:16+0200\n"
+"PO-Revision-Date: 2013-12-20 12:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: dFactory <info@dfactory.pl>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../download-attachments.php:259
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: ../download-attachments.php:260 ../includes/functions.php:270
 msgid "Added by"
@@ -35,7 +35,7 @@ msgstr "Τύπος αρχείου"
 
 #: ../download-attachments.php:263
 msgid "Icon"
-msgstr "Εικόνα"
+msgstr "Εικονίδιο"
 
 #: ../download-attachments.php:264
 msgid "Size"
@@ -52,19 +52,21 @@ msgstr "Λήψεις"
 
 #: ../download-attachments.php:362
 msgid "Are you sure you want to reset these settings to defaults?"
-msgstr ""
+msgstr "Είστε σίγουροι ότι θέλετε να επαναφέρετε τις ρυθμίσεις στις αρχικές;"
 
 #: ../download-attachments.php:363
 msgid "Are you sure you want to reset number of downloads of all attachments?"
 msgstr ""
+"Είστε σίγουροι ότι θέλετε να μηδενίσετε τον αριθμό λήψεων για όλα τα "
+"συννημένα;"
 
 #: ../download-attachments.php:379
 msgid "Select Attachments"
-msgstr "Επιλογή συννημένων"
+msgstr "Επιλέξτε Συννημένα"
 
 #: ../download-attachments.php:380
 msgid "Edit attachment"
-msgstr "Επεξεργασία συννημένων"
+msgstr "Επεξεργασία συννημένου"
 
 #: ../download-attachments.php:381
 msgid "Add selected attachments"
@@ -76,11 +78,11 @@ msgstr "Αποθήκευση συννημένου"
 
 #: ../download-attachments.php:383 ../includes/metabox.php:503
 msgid "No attachments added yet."
-msgstr "Δεν έχουν προστεθεί συννημένα"
+msgstr "Δεν έχουν προστεθεί συννημένα."
 
 #: ../download-attachments.php:384
 msgid "Do you want to remove this attachment?"
-msgstr "Θέλετε να αφαιρέσετε αυτό το συννημένο;"
+msgstr "Θέλετε να διαγράψετε αυτό το συννημένο;"
 
 #: ../download-attachments.php:385 ../includes/metabox.php:466
 msgid "Remove"
@@ -115,15 +117,15 @@ msgstr "Κάνενα συννημένο για λήψη"
 #: ../includes/settings.php:118 ../includes/settings.php:144
 #: ../includes/shortcodes.php:60
 msgid "Download Attachments"
-msgstr "Λήψη συννημένων"
+msgstr "Λήψη Συννημένων"
 
 #: ../includes/functions.php:274
 msgid "Attachment size"
-msgstr "Μέγεθος αρχείου"
+msgstr "Μέγεθος συννημένου"
 
 #: ../includes/metabox.php:261
 msgid "Order of attachments has been changed but some of them no longer exists"
-msgstr ""
+msgstr "Η σειρά των συννημένων άλλαξε αλλά κάποια δεν υπάρχουν πια"
 
 #: ../includes/metabox.php:329
 msgid "Add new attachment"
@@ -131,7 +133,7 @@ msgstr "Προσθήκη νέου συννημένου"
 
 #: ../includes/metabox.php:424
 msgid "Actions"
-msgstr ""
+msgstr "Δράσεις"
 
 #: ../includes/settings.php:55
 msgid "Enable"
@@ -139,7 +141,7 @@ msgstr "Ενεργοποίηση"
 
 #: ../includes/settings.php:56
 msgid "Disable"
-msgstr "Απενοργοποίηση"
+msgstr "Απενεργοποίηση"
 
 #: ../includes/settings.php:60
 msgid "All files"
@@ -151,84 +153,84 @@ msgstr "Επισύναψη σε άρθρο μόνο"
 
 #: ../includes/settings.php:65
 msgid "Manage download attachments"
-msgstr ""
+msgstr "Διαχείρηση λήψη συννημένων"
 
 #: ../includes/settings.php:69 ../includes/settings.php:177
 msgid "Media Library"
-msgstr ""
+msgstr "Βιβλιοθήκη Πολυμέσων"
 
 #: ../includes/settings.php:70
 msgid "Modal"
-msgstr ""
+msgstr "Επιλογή"
 
 #: ../includes/settings.php:74
 msgid "before the content"
-msgstr ""
+msgstr "πριν το περιεχόμενο"
 
 #: ../includes/settings.php:75
 msgid "after the content"
-msgstr ""
+msgstr "μετά το περιεχόμενο"
 
 #: ../includes/settings.php:76
 msgid "manually"
-msgstr ""
+msgstr "επιλογή"
 
 #: ../includes/settings.php:80
 msgid "caption"
-msgstr ""
+msgstr "επικεφαλίδα"
 
 #: ../includes/settings.php:81
 msgid "description"
-msgstr ""
+msgstr "περιγραφή"
 
 #: ../includes/settings.php:133
 msgid "Reset to defaults"
-msgstr ""
+msgstr "Επαναφορά στις αρχικές"
 
 #: ../includes/settings.php:137
 msgid "Reset downloads"
-msgstr ""
+msgstr "Μηδενισμός λήψεων"
 
 #: ../includes/settings.php:146
 msgid "Need support?"
-msgstr ""
+msgstr "Θέλετε υποστήριξη;"
 
 #: ../includes/settings.php:147
 msgid ""
 "If you are having problems with this plugin, please talk about them in the"
-msgstr ""
+msgstr "Εαν έχετε προβλήματα με αυτό το πρόσθετο, παρακαλώ ενημερώστε μας στο"
 
 #: ../includes/settings.php:147
 msgid "Support forum"
-msgstr ""
+msgstr "Φόρουμ υποστήριξης"
 
 #: ../includes/settings.php:149
 msgid "Do you like this plugin?"
-msgstr ""
+msgstr "Σας αρέσει αυτό το πρόσθετο;"
 
 #: ../includes/settings.php:150
 msgid "Rate it 5"
-msgstr ""
+msgstr "Βαθμολογήστε το με 5"
 
 #: ../includes/settings.php:150
 msgid "on WordPress.org"
-msgstr ""
+msgstr "στο WordPress.org"
 
 #: ../includes/settings.php:151
 msgid "Blog about it & link to the"
-msgstr ""
+msgstr "Γράψτε στο blog & συνδέστε με"
 
 #: ../includes/settings.php:151
 msgid "plugin page"
-msgstr ""
+msgstr "σελίδα πρόσθετου"
 
 #: ../includes/settings.php:152
 msgid "Check out our other"
-msgstr ""
+msgstr "Ελέγξτε και τα άλλα μας"
 
 #: ../includes/settings.php:152
 msgid "WordPress plugins"
-msgstr ""
+msgstr "πρόσθετα WordPress"
 
 #: ../includes/settings.php:155
 msgid "Created by"
@@ -236,151 +238,166 @@ msgstr "Δημιουργός"
 
 #: ../includes/settings.php:170
 msgid "General settings"
-msgstr ""
+msgstr "Γενικές ρυθμίσεις"
 
 #: ../includes/settings.php:171
 msgid "Label"
-msgstr ""
+msgstr "Επιγραφή"
 
 #: ../includes/settings.php:172
 msgid "Capabilities"
-msgstr ""
+msgstr "Ικανότητες"
 
 #: ../includes/settings.php:173
 msgid "Supported Post Types"
-msgstr ""
+msgstr "Τύποι υποστηριζόμενων άρθρων"
 
 #: ../includes/settings.php:174
 msgid "Backend Display"
-msgstr ""
+msgstr "Προβολή χώρου διαχείρισης"
 
 #: ../includes/settings.php:175
 msgid "Backend Downloads Description"
-msgstr ""
+msgstr "Περιγραφή Λήψεων στο Παρασκήνιο (Backend)"
 
 #: ../includes/settings.php:176
 msgid "Edit attachment link"
-msgstr ""
+msgstr "Επεξεργασία συνδέσμου συννημένου"
 
 #: ../includes/settings.php:178
 msgid "Downloads in Media Library"
-msgstr ""
+msgstr "Λήψεις στη Βιβλιοθήκη Πολυμέσων"
 
 #: ../includes/settings.php:179
 msgid "Frontend Display"
-msgstr ""
+msgstr "Προβολή Προσκηνίου (Frontend)"
 
 #: ../includes/settings.php:180
 msgid "Frontend Downloads Description"
-msgstr ""
+msgstr "Περιγραφή Λήψεων στο Προσκήνιο (Frontend)"
 
 #: ../includes/settings.php:181
 msgid "Use CSS style"
-msgstr ""
+msgstr "Χρήση στυλ CSS"
 
 #: ../includes/settings.php:182
 msgid "Pretty URLs"
-msgstr ""
+msgstr "Κομψά URLs"
 
 #: ../includes/settings.php:183
 msgid "Downloads List Display"
-msgstr ""
+msgstr "Προβολή Λίστας Λήψεων"
 
 #: ../includes/settings.php:184
 msgid "Deactivation"
-msgstr ""
+msgstr "Απενεργοποίηση"
 
 #: ../includes/settings.php:196
 msgid "Enter download attachments list label."
-msgstr ""
+msgstr "Εισάγετε λίστα επιγραφών για τις λήψεις συννημένων."
 
 #: ../includes/settings.php:217
 msgid "Select which post types would you like to enable for your downloads."
-msgstr ""
+msgstr "Επιλέξτε τον τύπο άρθρων που θέλετε να ενεργοποιήσετε για τις λήψεις."
 
 #: ../includes/settings.php:239
 msgid ""
 "Select which columns would you like to enable on backend for your downloads."
 msgstr ""
+"Επιλέξτε ποιές στήλες επιθυμείτε να ενεργοποιήσετε στο παρασκήνιο (backend) "
+"για τις λήψεις σας."
 
 #: ../includes/settings.php:261
 msgid ""
 "Select which columns would you like to enable on frontend for your downloads."
 msgstr ""
+"Επιλέξτε ποιές στήλες επιθυμείτε να ενεργοποιήσετε στο προσκήνιο (frontend) "
+"για τις λήψεις σας."
 
 #: ../includes/settings.php:282
 msgid "Select if you'd like to use bultin CSS style."
-msgstr ""
+msgstr "Επιλέξτε εαν θέλετε να χρησιμοποιήσετε το προκαθορισμένο CSS στυλ"
 
 #: ../includes/settings.php:303
 msgid "Enable if you want to use pretty URLs."
-msgstr ""
+msgstr "Ενεργοποιήστε εαν θέλετε να χρησιμοποιήσετε pretty URLs."
 
 #: ../includes/settings.php:305
 msgid "Slug"
-msgstr ""
+msgstr "Σύντομο όνομα"
 
 #: ../includes/settings.php:309
 msgid "Download link slug."
-msgstr ""
+msgstr "Σύντομο όνομα συνδέσμου Λήψεων"
 
 #: ../includes/settings.php:332
 msgid "Select where you would like your download attachments to be displayed."
-msgstr ""
+msgstr "Επιλέξτε που θέλετε να προβάλλονται οι λήψεις σηννυμένων."
 
 #: ../includes/settings.php:353
 msgid ""
 "Select what fields to use on backend for download attachments description."
-msgstr ""
+msgstr "Επιλέξτε ποια πεδία "
 
 #: ../includes/settings.php:374
 msgid ""
 "Select what fields to use on frontend for download attachments description."
 msgstr ""
+"Επιλέξτε ποια πεδία θα χρησιμοποιήτε στο προσκήνιο για περιγραφή των λήψεων "
+"συννημένων."
 
 #: ../includes/settings.php:395
 msgid "Select where you would like to edit download attachments."
-msgstr ""
+msgstr "Επιλέξτε που θέλετε να επεξεργάζεστε τις λήψεις συννημένων"
 
 #: ../includes/settings.php:416
 msgid "Select which attachments should be visible in Media Library window."
 msgstr ""
+"Επιλέξτε ποια συννημένα θα είναι ορατά στο παράθυρο της Βιβλιοθήκης Πολυμέσων"
 
 #: ../includes/settings.php:437
 msgid ""
 "Enable if you want to display downloads count in your Media Library columns."
 msgstr ""
+"Ενεργοποιήστε εαν θέλετε να προβάλλεται ο αριθμός λήψεων στις στήλες της "
+"Βιβλιοθήκης Πολυμέσων."
 
 #: ../includes/settings.php:456
 msgid "Role"
-msgstr ""
+msgstr "Χρήστης"
 
 #: ../includes/settings.php:461
 msgid "None"
-msgstr ""
+msgstr "Κανένα"
 
 #: ../includes/settings.php:493
 msgid ""
 "Select user roles allowed to add, remove and manage Download Attachments."
 msgstr ""
+"Επιλέξτε το ρόλο χρηστών για προσθήκη, διαγραφή και επεξεργασία στο Λήψεις "
+"Συννημένων"
 
 #: ../includes/settings.php:516
 msgid "Enable if you want all plugin data to be deleted on deactivation."
 msgstr ""
+"Ενεργοποιήστε εαν επιθυμείτε όλα τα δεδομένα του πρόσθετου να διαγραφούν "
+"κατα την απενεργοποίηση."
 
 #: ../includes/settings.php:667
 msgid "Settings restored to defaults."
-msgstr ""
+msgstr "Έγινε επαναφορά ρυθμίσεων στις αρχικές."
 
 #: ../includes/settings.php:685
 msgid "An error occurred while resetting the number of downloads."
-msgstr ""
+msgstr "Προέκυψε λάθος κατά το μηδενισμό των λήψεων."
 
 #: ../includes/settings.php:687
 msgid "Number of downloads of all attachments has been reset."
-msgstr ""
+msgstr "Ο αριθμός λήψεων όλων των συννημένων έχει μηδενιστεί"
 
 msgid ""
 "This is an auto-draft. You can not add attachments here. Please save your "
 "post first."
 msgstr ""
+"Αυτή η έκδοση είναι προσχέδιο. Δεν μπορείτε να προστέσετε συννημένα εδώ. "
+"Παρακαλώ πρώτα αποθηκεύστε το άρθρο σας."
