@@ -82,13 +82,13 @@ class Download_Attachments_Metabox
 	*/
 	public function update_attachments()
 	{
-		if(isset($_POST['danonce'], $_POST['post_id'], $_POST['attachments_ids'], $_POST['action']) && $_POST['action'] === 'da-new-file' && is_array($_POST['attachments_ids']) && !empty($_POST['attachments_ids']) && current_user_can('manage_download_attachments') && wp_verify_nonce($_POST['danonce'], 'da-add-file-nonce') !== FALSE)
+		if(isset($_POST['danonce'], $_POST['post_id'], $_POST['attachments_ids'], $_POST['action']) && ($post_id = (int)$_POST['post_id']) > 0 && $_POST['action'] === 'da-new-file' && is_array($_POST['attachments_ids']) && !empty($_POST['attachments_ids']) && current_user_can('manage_download_attachments') && wp_verify_nonce($_POST['danonce'], 'da-add-file-nonce') !== FALSE)
 		{
 			global $current_user;
 
 			$attachments_ids = $files_ids = $new_files = $deleted_atts = $rows = array();
-			$post_id = (int)$_POST['post_id'];
 
+			//checks already added attachments
 			if(($files = get_post_meta($post_id, '_da_attachments', TRUE)) !== '' && is_array($files) && !empty($files))
 			{
 				foreach($files as $inc_id => $file)
@@ -99,11 +99,13 @@ class Download_Attachments_Metabox
 			else
 				$files = array();
 
+			//prepares integer IDs
 			foreach($_POST['attachments_ids'] as $att_id)
 			{
 				$files_ids[] = (int)$att_id;
 			}
 
+			//make sure we have unique attachments just in case
 			$files_ids = array_unique($files_ids);
 
 			//removes deselected attachments
@@ -133,6 +135,7 @@ class Download_Attachments_Metabox
 				}
 			}
 
+			//adds selected attachments
 			foreach($files_ids as $att_id)
 			{
 				//if we already have some attached files

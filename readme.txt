@@ -3,8 +3,8 @@ Contributors: dfactory
 Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.5
-Tested up to: 3.8
-Stable tag: 1.0.5
+Tested up to: 3.8.1
+Stable tag: 1.0.6
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -40,6 +40,7 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 * Greek - by vas gargan
 * Polish - by Bartosz Arendt
 * Russian - by Semion Zuev
+* Spanish - by by [Cristian Sierra](http://www.truedacolor.com/)
 
 == Installation ==
 
@@ -58,6 +59,9 @@ No questions yet.
 3. screenshot-3.png
 
 == Changelog ==
+
+= 1.0.6 =
+* New: Spanish translation, thanks to Cristian Sierra
 
 = 1.0.5 =
 * New: Danish translation, thanks to Martin Schulze
@@ -79,5 +83,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.5 =
-* New: Danish translation, thanks to Martin Schulze
+= 1.0.6 =
+* New: Spanish translation, thanks to Cristian Sierra

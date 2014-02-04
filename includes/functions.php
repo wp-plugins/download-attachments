@@ -32,6 +32,7 @@ function da_get_download_attachments($post_id = 0, $args = array())
 	}
 	elseif(is_numeric($args['include']))
 		$args['include'] = array((int)$args['include']);
+	//shortcode
 	elseif(is_string($args['include']) && !empty($args['include']))
 		$args['include'] = json_decode('['.$args['include'].']', TRUE);
 	else
