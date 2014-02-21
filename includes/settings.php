@@ -116,7 +116,22 @@ class Download_Attachments_Settings
 		echo '
 		<div class="wrap">'.screen_icon().'
 			<h2>'.__('Download Attachments', 'download-attachments').'</h2>
-			<div class="metabox-holder postbox-container download-attachments-settings">
+			<div class="download-attachments-settings">
+				<div class="df-credits">
+					<h3 class="hndle">'.__('Download Attachments', 'download-attachments').' '.$this->defaults['version'].'</h3>
+					<div class="inside">
+						<h4 class="inner">'.__('Need support?', 'download-attachments').'</h4>
+						<p class="inner">'.__('If you are having problems with this plugin, please talk about them in the', 'download-attachments').' <a href="http://www.dfactory.eu/support/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=support" target="_blank" title="'.__('Support forum', 'download-attachments').'">'.__('Support forum', 'download-attachments').'</a></p>
+						<hr />
+						<h4 class="inner">'.__('Do you like this plugin?', 'download-attachments').'</h4>
+						<p class="inner"><a href="http://wordpress.org/support/view/plugin-reviews/download-attachments" target="_blank" title="'.__('Rate it 5', 'download-attachments').'">'.__('Rate it 5', 'download-attachments').'</a> '.__('on WordPress.org', 'download-attachments').'<br />'.
+						__('Blog about it & link to the', 'download-attachments').' <a href="http://www.dfactory.eu/plugins/download-attachments/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=blog-about" target="_blank" title="'.__('plugin page', 'download-attachments').'">'.__('plugin page', 'download-attachments').'</a><br />'.
+						__('Check out our other', 'download-attachments').' <a href="http://www.dfactory.eu/plugins/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=other-plugins" target="_blank" title="'.__('WordPress plugins', 'download-attachments').'">'.__('WordPress plugins', 'download-attachments').'</a>
+						</p>            
+						<hr />
+						<p class="df-link inner">'.__('Created by', 'download-attachments').' <a href="http://www.dfactory.eu/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=created-by" target="_blank" title="dFactory - Quality plugins for WordPress"><img src="'.DOWNLOAD_ATTACHMENTS_URL.'/images/logo-dfactory.png'.'" title="dFactory - Quality plugins for WordPress" alt="dFactory - Quality plugins for WordPress" /></a></p>
+					</div>
+				</div>
 				<form action="options.php" method="post">';
 
 		wp_nonce_field('update-options');
@@ -140,21 +155,6 @@ class Download_Attachments_Settings
 					</p>
 				</form>
 			</div>
-			<div class="df-credits postbox-container">
-				<h3 class="metabox-title">'.__('Download Attachments', 'download-attachments').' '.$this->defaults['version'].'</h3>
-				<div class="inner">
-					<h3>'.__('Need support?', 'download-attachments').'</h3>
-					<p>'.__('If you are having problems with this plugin, please talk about them in the', 'download-attachments').' <a href="http://www.dfactory.eu/support/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=support" target="_blank" title="'.__('Support forum', 'download-attachments').'">'.__('Support forum', 'download-attachments').'</a></p>
-					<hr />
-					<h3>'.__('Do you like this plugin?', 'download-attachments').'</h3>
-					<p><a href="http://wordpress.org/support/view/plugin-reviews/download-attachments" target="_blank" title="'.__('Rate it 5', 'download-attachments').'">'.__('Rate it 5', 'download-attachments').'</a> '.__('on WordPress.org', 'download-attachments').'<br />'.
-					__('Blog about it & link to the', 'download-attachments').' <a href="http://www.dfactory.eu/plugins/download-attachments/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=blog-about" target="_blank" title="'.__('plugin page', 'download-attachments').'">'.__('plugin page', 'download-attachments').'</a><br />'.
-					__('Check out our other', 'download-attachments').' <a href="http://www.dfactory.eu/plugins/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=other-plugins" target="_blank" title="'.__('WordPress plugins', 'download-attachments').'">'.__('WordPress plugins', 'download-attachments').'</a>
-					</p>            
-					<hr />
-					<p class="df-link">'.__('Created by', 'download-attachments').' <a href="http://www.dfactory.eu/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=created-by" target="_blank" title="dFactory - Quality plugins for WordPress"><img src="'.DOWNLOAD_ATTACHMENTS_URL.'/images/logo-dfactory.png'.'" title="dFactory - Quality plugins for WordPress" alt="dFactory - Quality plugins for WordPress" /></a></p>
-				</div>
-			</div>
 			<div class="clear"></div>
 		</div>';
 	}
@@ -165,23 +165,29 @@ class Download_Attachments_Settings
 	*/
 	public function register_settings()
 	{
-		//general
+		//general section
 		register_setting('download_attachments_general', 'download_attachments_general', array(&$this, 'validate_general'));
 		add_settings_section('download_attachments_general', __('General settings', 'download-attachments'), '', 'download_attachments_general');
 		add_settings_field('da_general_label', __('Label', 'download-attachments'), array(&$this, 'da_general_label'), 'download_attachments_general', 'download_attachments_general');
 		add_settings_field('da_general_capabilities', __('Capabilities', 'download-attachments'), array(&$this, 'da_general_capabilities'), 'download_attachments_general', 'download_attachments_general');
 		add_settings_field('da_general_post_types', __('Supported Post Types', 'download-attachments'), array(&$this, 'da_general_post_types'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_backend_display', __('Backend Display', 'download-attachments'), array(&$this, 'da_general_backend_display'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_backend_content', __('Backend Downloads Description', 'download-attachments'), array(&$this, 'da_general_backend_content'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_attachment_link', __('Edit attachment link', 'download-attachments'), array(&$this, 'da_general_attachment_link'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_libraries', __('Media Library', 'download-attachments'), array(&$this, 'da_general_libraries'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_downloads_in_media_library', __('Downloads in Media Library', 'download-attachments'), array(&$this, 'da_general_downloads_in_media_library'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_frontend_display', __('Frontend Display', 'download-attachments'), array(&$this, 'da_general_frontend_display'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_frontend_content', __('Frontend Downloads Description', 'download-attachments'), array(&$this, 'da_general_frontend_content'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_css_style', __('Use CSS style', 'download-attachments'), array(&$this, 'da_general_css_style'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_pretty_urls', __('Pretty URLs', 'download-attachments'), array(&$this, 'da_general_pretty_urls'), 'download_attachments_general', 'download_attachments_general');
-		add_settings_field('da_general_download_box_display', __('Downloads List Display', 'download-attachments'), array(&$this, 'da_general_download_box_display'), 'download_attachments_general', 'download_attachments_general');
 		add_settings_field('da_general_deactivation_delete', __('Deactivation', 'download-attachments'), array(&$this, 'da_general_deactivation_delete'), 'download_attachments_general', 'download_attachments_general');
+
+		//admin section
+		add_settings_section('download_attachments_general_admin', __('Admin settings', 'download-attachments'), '', 'download_attachments_general');
+		add_settings_field('da_general_backend_display', __('Backend Display', 'download-attachments'), array(&$this, 'da_general_backend_display'), 'download_attachments_general', 'download_attachments_general_admin');
+		add_settings_field('da_general_backend_content', __('Backend Downloads Description', 'download-attachments'), array(&$this, 'da_general_backend_content'), 'download_attachments_general', 'download_attachments_general_admin');
+		add_settings_field('da_general_attachment_link', __('Edit attachment link', 'download-attachments'), array(&$this, 'da_general_attachment_link'), 'download_attachments_general', 'download_attachments_general_admin');
+		add_settings_field('da_general_libraries', __('Media Library', 'download-attachments'), array(&$this, 'da_general_libraries'), 'download_attachments_general', 'download_attachments_general_admin');
+		add_settings_field('da_general_downloads_in_media_library', __('Downloads in Media Library', 'download-attachments'), array(&$this, 'da_general_downloads_in_media_library'), 'download_attachments_general', 'download_attachments_general_admin');
+
+		//frontend section
+		add_settings_section('download_attachments_general_frontend', __('Frontend settings', 'download-attachments'), '', 'download_attachments_general');
+		add_settings_field('da_general_frontend_display', __('Frontend Display', 'download-attachments'), array(&$this, 'da_general_frontend_display'), 'download_attachments_general', 'download_attachments_general_frontend');
+		add_settings_field('da_general_frontend_content', __('Frontend Downloads Description', 'download-attachments'), array(&$this, 'da_general_frontend_content'), 'download_attachments_general', 'download_attachments_general_frontend');
+		add_settings_field('da_general_css_style', __('Use CSS style', 'download-attachments'), array(&$this, 'da_general_css_style'), 'download_attachments_general', 'download_attachments_general_frontend');
+		add_settings_field('da_general_pretty_urls', __('Pretty URLs', 'download-attachments'), array(&$this, 'da_general_pretty_urls'), 'download_attachments_general', 'download_attachments_general_frontend');
+		add_settings_field('da_general_download_box_display', __('Downloads List Display', 'download-attachments'), array(&$this, 'da_general_download_box_display'), 'download_attachments_general', 'download_attachments_general_frontend');
 	}
 
 

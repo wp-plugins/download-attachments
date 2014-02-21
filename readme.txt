@@ -4,7 +4,7 @@ Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -60,6 +60,9 @@ No questions yet.
 
 == Changelog ==
 
+= 1.0.7 =
+* Tweak: UI improvements for WordPress 3.8
+
 = 1.0.6 =
 * New: Spanish translation, thanks to Cristian Sierra
 
@@ -83,5 +86,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.6 =
-* New: Spanish translation, thanks to Cristian Sierra
+= 1.0.7 =
+* Tweak: UI improvements for WordPress 3.8
