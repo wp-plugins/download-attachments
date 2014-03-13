@@ -156,7 +156,7 @@ function da_get_download_attachments($post_id = 0, $args = array())
 		$files[$key]['attachment_size'] = size_format($row['attachment_size']);
 	}
 
-	return $files;
+	return apply_filters('da_get_attachments', $files);
 }
 
 
@@ -314,9 +314,9 @@ function da_display_download_attachments($post_id = 0, $args = array())
 		$html .= '</'.$args['container'].'>';
 
 	if($args['echo'] === 1)
-		echo $html;
+		echo apply_filters('da_display_attachments', $html);
 	else
-		return $html;
+		return apply_filters('da_display_attachments', $html);
 }
 
 

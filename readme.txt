@@ -4,7 +4,7 @@ Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -36,11 +36,12 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 
 = Translations: =
 
-* Danish - by Martin Schulze 
+* Danish - by Martin Schulze
+* Dutch - by [Sebas Blom](http://www.basbva.nl/)
 * Greek - by vas gargan
 * Polish - by Bartosz Arendt
 * Russian - by Semion Zuev
-* Spanish - by by [Cristian Sierra](http://www.truedacolor.com/)
+* Spanish - by [Cristian Sierra](http://www.truedacolor.com/)
 
 == Installation ==
 
@@ -59,6 +60,10 @@ No questions yet.
 3. screenshot-3.png
 
 == Changelog ==
+
+= 1.0.8 =
+* New: Dutch translation, thanks to [Sebas Blom](http://www.basbva.nl/)
+* Tweak: Changed default attachment editing option to modal
 
 = 1.0.7 =
 * Tweak: UI improvements for WordPress 3.8
@@ -86,5 +91,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.7 =
-* Tweak: UI improvements for WordPress 3.8
+= 1.0.8 =
+* New: Dutch translation, thanks to [Sebas Blom](http://www.basbva.nl/)
