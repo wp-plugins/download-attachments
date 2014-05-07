@@ -88,7 +88,7 @@ class Download_Attachments_Settings
 	*/
 	public function load_post_types() 
 	{
-		$this->post_types = apply_filters('da_post_types', array_merge(array('post', 'page', 'shop_order'), get_post_types(array('_builtin' => FALSE, 'public' => TRUE), 'names')));
+		$this->post_types = apply_filters('da_post_types', array_merge(array('post', 'page'), get_post_types(array('_builtin' => FALSE, 'public' => TRUE), 'names')));
 		sort($this->post_types, SORT_STRING);
 	}
 

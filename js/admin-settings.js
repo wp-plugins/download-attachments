@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	$(document).on('change', '#nm-general-pretty-urls-no, #nm-general-pretty-urls-yes', function() {
+	$(document).on('change', '#da-general-pretty-urls-no, #da-general-pretty-urls-yes', function() {
 		if($(this).val() === 'no') {
 			$('#da_general_download_link').fadeOut(300);
 		} else {

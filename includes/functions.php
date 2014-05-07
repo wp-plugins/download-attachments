@@ -268,7 +268,7 @@ function da_display_download_attachments($post_id = 0, $args = array())
 				$html .= '<span class="attachment-link-before">'.$args['link_before'].'</span>';
 
 			//link
-			$html .= '<a href="'.($options['pretty_urls'] === TRUE ? site_url('/'.$options['download_link'].'/'.$attachment['attachment_id'].'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment['attachment_id'])).'" title="'.$title.'">'.$title.'</a>';
+			$html .= '<a href="'.($options['pretty_urls'] === TRUE ? site_url('/'.$options['download_link'].'/'.$attachment['attachment_id'].'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment['attachment_id'])).'" class="attachment-link" title="'.$title.'">'.$title.'</a>';
 
 			//link after
 			if($args['link_after'] !== '')
@@ -345,7 +345,7 @@ function da_download_attachment_url($attachment_id = 0)
 	{
 		$options = get_option('download_attachments_general');
 
-		return ($options['pretty_urls'] === TRUE ? site_url('/'.$options['download_link'].'/'.$attachment_id.'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment_id));
+		return ($options['pretty_urls'] === true ? site_url('/'.$options['download_link'].'/'.$attachment_id.'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment_id));
 	}
 	else
 		return '';
@@ -357,19 +357,20 @@ function da_download_attachment($attachment_id = 0)
 	if(get_post_type($attachment_id) === 'attachment')
 	{
 		$uploads = wp_upload_dir();
-		$attachment = get_post_meta($attachment_id, '_wp_attached_file', TRUE);
+		$attachment = get_post_meta($attachment_id, '_wp_attached_file', true);
 		$filepath = $uploads['basedir'].'/'.$attachment;
 
 		if(!file_exists($filepath) || !is_readable($filepath))
-			return FALSE;
+			return false;
 
-		//if filename contains folder names
-		if(($position = strrpos($attachment, '/', 0)) !== FALSE)
+		// if filename contains folders
+		if(($position = strrpos($attachment, '/', 0)) !== false)
 			$filename = substr($attachment, $position + 1);
 		else
 			$filename = $attachment;
 
-		if(ini_get('zlib.output_compression')) ini_set('zlib.output_compression', 'Off');
+		if(ini_get('zlib.output_compression'))
+			ini_set('zlib.output_compression', 0);
 
 		header('Content-Type: application/download');
 		header('Content-Disposition: attachment; filename='.rawurldecode($filename));
@@ -380,23 +381,24 @@ function da_download_attachment($attachment_id = 0)
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 		header('Content-Length: '.filesize($filepath));
 
-		if($filepath = fopen($filepath, 'r'))
+		if($filepath = fopen($filepath, 'rb'))
 		{
 			while(!feof($filepath) && (!connection_aborted()))
 			{
-				echo($buffer = fread($filepath, 524288));
+				echo fread($filepath, 1048576);
 				flush();
 			}
 
 			fclose($filepath);
 		}
-		else return FALSE;
+		else
+			return false;
 
-		update_post_meta($attachment_id, '_da_downloads', (int)get_post_meta($attachment_id, '_da_downloads', TRUE) + 1);
+		update_post_meta($attachment_id, '_da_downloads', (int)get_post_meta($attachment_id, '_da_downloads', true) + 1);
 
 		exit;
 	}
 	else
-		return FALSE;
+		return false;
 }
 ?>
