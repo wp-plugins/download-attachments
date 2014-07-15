@@ -3,8 +3,8 @@ Contributors: dfactory
 Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.5
-Tested up to: 3.9.0
-Stable tag: 1.0.9
+Tested up to: 3.9.1
+Stable tag: 1.0.10
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -61,6 +61,9 @@ No questions yet.
 
 == Changelog ==
 
+= 1.0.10 =
+* Fix: Important attachments query optimization and general plugin performance, especially on sites with large number of attachments
+
 = 1.0.9 =
 * Tweak: Removed shop_order from default post types support
 * Tweak: Confirmed WordPress 3.9 compatibility
@@ -95,6 +98,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.9 =
-* Tweak: Removed shop_order from default post types support
-* Tweak: Confirmed WordPress 3.9 compatibility
+= 1.0.10 =
+* Fix: Important attachments query optimization and general plugin performance, especially on sites with large number of attachments

@@ -361,40 +361,43 @@ class Download_Attachments_Metabox
 			}
 		}
 
-		$files_data = get_posts(
-			array(
-				'include' => array_keys($files),
-				'posts_per_page' => -1,
-				'offset' => 0,
-				'orderby' => 'post_date',
-				'order' => 'DESC',
-				'post_type' => 'attachment',
-				'post_status' => 'any'
-			)
-		);
-
-		if(!empty($files_data))
+		if(!empty($files))
 		{
-			foreach($files_data as $file)
+			$files_data = get_posts(
+				array(
+					'include' => array_keys($files),
+					'posts_per_page' => -1,
+					'offset' => 0,
+					'orderby' => 'post_date',
+					'order' => 'DESC',
+					'post_type' => 'attachment',
+					'post_status' => 'any'
+				)
+			);
+
+			if(!empty($files_data))
 			{
-				if(isset($files[$file->ID]))
+				foreach($files_data as $file)
 				{
-					$title = '';
-					$filename = get_attached_file($file->ID);
-					$filetype = wp_check_filetype($filename);
-					$displayname = get_avatar($files[$file->ID]['file_user_id'], 16).get_the_author_meta('display_name', $files[$file->ID]['file_user_id']);
+					if(isset($files[$file->ID]))
+					{
+						$title = '';
+						$filename = get_attached_file($file->ID);
+						$filetype = wp_check_filetype($filename);
+						$displayname = get_avatar($files[$file->ID]['file_user_id'], 16).get_the_author_meta('display_name', $files[$file->ID]['file_user_id']);
 
-					if($this->options['general']['backend_content']['caption'] === TRUE)
-						$title .= '<span class="caption">'.esc_attr($file->post_excerpt).'</span>';
+						if($this->options['general']['backend_content']['caption'] === TRUE)
+							$title .= '<span class="caption">'.esc_attr($file->post_excerpt).'</span>';
 
-					if($this->options['general']['backend_content']['description'] === TRUE)
-						$title .= '<span class="description">'.esc_attr($file->post_content).'</span>';
+						if($this->options['general']['backend_content']['description'] === TRUE)
+							$title .= '<span class="description">'.esc_attr($file->post_content).'</span>';
 
-					$files[$file->ID]['file_date'] = date_i18n(get_option('date_format').' '.get_option('time_format'), strtotime($files[$file->ID]['file_date']));
-					$files[$file->ID]['file_author'] = (current_user_can('edit_users') ? '<a href="'.esc_url(admin_url('user-edit.php?user_id='.$files[$file->ID]['file_user_id'])).'">'.$displayname.'</a>' : $displayname);
-					$files[$file->ID]['file_type'] = ($filetype['ext'] === 'jpeg' ? 'jpg' : $filetype['ext']);
-					$files[$file->ID]['file_size'] = (file_exists($filename) ? size_format(filesize($filename)) : '0 B');
-					$files[$file->ID]['file_title'] = '<p><a target="_blank" href="'.esc_url(wp_get_attachment_url($file->ID)).'">'.esc_attr($file->post_title).'</a>'.$title.'</p>';
+						$files[$file->ID]['file_date'] = date_i18n(get_option('date_format').' '.get_option('time_format'), strtotime($files[$file->ID]['file_date']));
+						$files[$file->ID]['file_author'] = (current_user_can('edit_users') ? '<a href="'.esc_url(admin_url('user-edit.php?user_id='.$files[$file->ID]['file_user_id'])).'">'.$displayname.'</a>' : $displayname);
+						$files[$file->ID]['file_type'] = ($filetype['ext'] === 'jpeg' ? 'jpg' : $filetype['ext']);
+						$files[$file->ID]['file_size'] = (file_exists($filename) ? size_format(filesize($filename)) : '0 B');
+						$files[$file->ID]['file_title'] = '<p><a target="_blank" href="'.esc_url(wp_get_attachment_url($file->ID)).'">'.esc_attr($file->post_title).'</a>'.$title.'</p>';
+					}
 				}
 			}
 		}

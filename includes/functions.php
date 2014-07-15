@@ -101,35 +101,38 @@ function da_get_download_attachments($post_id = 0, $args = array())
 		$args['include'] = array_keys($files);
 	}
 
-	$files_data = get_posts(
-		array(
-			'include' => $args['include'],
-			'posts_per_page' => -1,
-			'offset' => 0,
-			'orderby' => 'post_date',
-			'order' => 'DESC',
-			'post_type' => 'attachment',
-			'post_status' => 'any'
-		)
-	);
-
-	if(!empty($files_data))
+	if(!empty($args['include']))
 	{
-		foreach($files_data as $file)
-		{
-			if(isset($files[$file->ID]))
-			{
-				$filename = get_attached_file($file->ID);
-				$filetype = wp_check_filetype($filename);
-				$extension = ($filetype['ext'] === 'jpeg' ? 'jpg' : $filetype['ext']);
+		$files_data = get_posts(
+			array(
+				'include' => $args['include'],
+				'posts_per_page' => -1,
+				'offset' => 0,
+				'orderby' => 'post_date',
+				'order' => 'DESC',
+				'post_type' => 'attachment',
+				'post_status' => 'any'
+			)
+		);
 
-				$files[$file->ID]['attachment_title'] = trim(esc_attr($file->post_title));
-				$files[$file->ID]['attachment_caption'] = trim(esc_attr($file->post_excerpt));
-				$files[$file->ID]['attachment_description'] = trim(esc_attr($file->post_content));
-				$files[$file->ID]['attachment_size'] = (file_exists($filename) ? filesize($filename) : 0);
-				$files[$file->ID]['attachment_url'] = esc_url(wp_get_attachment_url($file->ID));
-				$files[$file->ID]['attachment_type'] = $extension;
-				$files[$file->ID]['attachment_icon_url'] = (file_exists(DOWNLOAD_ATTACHMENTS_PATH.'images/ext/'.$extension.'.gif') ? DOWNLOAD_ATTACHMENTS_URL.'/images/ext/'.$extension.'.gif' : DOWNLOAD_ATTACHMENTS_URL.'/images/ext/unknown.gif');
+		if(!empty($files_data))
+		{
+			foreach($files_data as $file)
+			{
+				if(isset($files[$file->ID]))
+				{
+					$filename = get_attached_file($file->ID);
+					$filetype = wp_check_filetype($filename);
+					$extension = ($filetype['ext'] === 'jpeg' ? 'jpg' : $filetype['ext']);
+
+					$files[$file->ID]['attachment_title'] = trim(esc_attr($file->post_title));
+					$files[$file->ID]['attachment_caption'] = trim(esc_attr($file->post_excerpt));
+					$files[$file->ID]['attachment_description'] = trim(esc_attr($file->post_content));
+					$files[$file->ID]['attachment_size'] = (file_exists($filename) ? filesize($filename) : 0);
+					$files[$file->ID]['attachment_url'] = esc_url(wp_get_attachment_url($file->ID));
+					$files[$file->ID]['attachment_type'] = $extension;
+					$files[$file->ID]['attachment_icon_url'] = (file_exists(DOWNLOAD_ATTACHMENTS_PATH.'images/ext/'.$extension.'.gif') ? DOWNLOAD_ATTACHMENTS_URL.'/images/ext/'.$extension.'.gif' : DOWNLOAD_ATTACHMENTS_URL.'/images/ext/unknown.gif');
+				}
 			}
 		}
 	}
