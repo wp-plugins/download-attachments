@@ -2,7 +2,7 @@
 /*
 Plugin Name: Download Attachments
 Description: Download Attachments is a new approach to managing downloads in WordPress. It allows you to easily add and display download links in any post or page.
-Version: 1.0.10
+Version: 1.1.0
 Author: dFactory
 Author URI: http://www.dfactory.eu/
 Plugin URI: http://www.dfactory.eu/plugins/download-attachments/
@@ -29,6 +29,7 @@ define('DOWNLOAD_ATTACHMENTS_REL_PATH', dirname(plugin_basename(__FILE__)).'/');
 
 $download_attachments = new Download_Attachments();
 
+include_once(DOWNLOAD_ATTACHMENTS_PATH.'includes/update.php');
 include_once(DOWNLOAD_ATTACHMENTS_PATH.'includes/functions.php');
 include_once(DOWNLOAD_ATTACHMENTS_PATH.'includes/shortcodes.php');
 include_once(DOWNLOAD_ATTACHMENTS_PATH.'includes/settings.php');
@@ -77,7 +78,7 @@ class Download_Attachments
 				'manage_download_attachments'
 			)
 		),
-		'version' => '1.0.10'
+		'version' => '1.1.0'
 	);
 
 
@@ -89,22 +90,19 @@ class Download_Attachments
 		register_activation_hook(__FILE__, array(&$this, 'multisite_activation'));
 		register_deactivation_hook(__FILE__, array(&$this, 'multisite_deactivation'));
 
-		//settings
+		// settings
 		$this->options = array_merge(
 			array('general' => get_option('download_attachments_general'))
 		);
 
-		//update plugin version
-		update_option('download_attachments_version', $this->defaults['version'], '', 'no');
-
-		//actions
+		// actions
 		add_action('plugins_loaded', array(&$this, 'load_textdomain'));
 		add_action('after_setup_theme', array(&$this, 'pass_variables'), 9);
 		add_action('admin_enqueue_scripts', array(&$this, 'admin_scripts_styles'));
-		add_action('wp_enqueue_scripts', array(&$this, 'front_scripts_styles'));
+		add_action('wp_enqueue_scripts', array(&$this, 'frontend_scripts_styles'));
 		add_action('send_headers', array(&$this, 'download_redirect'));
 
-		//filters
+		// filters
 		add_filter('the_content', array(&$this, 'add_content'));
 		add_filter('plugin_row_meta', array(&$this, 'plugin_extend_links'), 10, 2);
 		add_filter('plugin_action_links', array(&$this, 'plugin_settings_link'), 10, 2);
@@ -146,7 +144,7 @@ class Download_Attachments
 	{
 		global $wp_roles;
 
-		//add caps to administrators
+		// add caps to administrators
 		foreach($wp_roles->roles as $role_name => $display_name)
 		{
 			$role = $wp_roles->get_role($role_name);
@@ -160,7 +158,7 @@ class Download_Attachments
 			}
 		}
 
-		//add default options
+		// add default options
 		add_option('download_attachments_general', $this->defaults['general'], '', 'no');
 		add_option('download_attachments_version', $this->defaults['version'], '', 'no');
 	}
@@ -201,11 +199,11 @@ class Download_Attachments
 	/**
 	 * Deactivation
 	*/
-	public function deactivate_single($multi = FALSE)
+	public function deactivate_single($multi = false)
 	{
 		global $wp_roles;
 
-		//remove capabilities
+		// remove capabilities
 		foreach($wp_roles->roles as $role_name => $display_name)
 		{
 			$role = $wp_roles->get_role($role_name);
@@ -216,7 +214,7 @@ class Download_Attachments
 			}
 		}
 
-		if($multi === TRUE)
+		if($multi)
 		{
 			$options = get_option('download_attachments_general');
 			$check = $options['deactivation_delete'];
@@ -224,11 +222,8 @@ class Download_Attachments
 		else
 			$check = $this->options['general']['deactivation_delete'];
 
-		if($check === TRUE)
-		{
+		if($check)
 			delete_option('download_attachments_general');
-			delete_option('download_attachments_version');
-		}
 	}
 
 
@@ -257,6 +252,7 @@ class Download_Attachments
 	{
 		$this->columns = array(
 			'id' => __('ID', 'download-attachments'),
+			'exclude' => __('Exclude', 'download-attachments'),
 			'author' => __('Added by', 'download-attachments'),
 			'title' => __('Title', 'download-attachments'),
 			'type' => __('File type', 'download-attachments'),
@@ -337,76 +333,78 @@ class Download_Attachments
 			'download-attachments-admin',
 			DOWNLOAD_ATTACHMENTS_URL.'/css/admin.css'
 		);
-		
-		wp_register_style(
-			'download-attachments-wplike',
-			DOWNLOAD_ATTACHMENTS_URL.'/css/wp-like-ui-theme.css'
-		);
-		
-		wp_register_script(
-			'download-attachments-admin-post',
-			DOWNLOAD_ATTACHMENTS_URL.'/js/admin-post.js',
-			array('jquery')
-		);
-		
-		wp_register_script(
-			'download-attachments-admin-settings',
-			DOWNLOAD_ATTACHMENTS_URL.'/js/admin-settings.js',
-			array('jquery', 'jquery-ui-core', 'jquery-ui-button')
-		);
-		
-		wp_localize_script(
-			'download-attachments-admin-settings',
-			'daArgs',
-			array(
-				'resetToDefaults' => __('Are you sure you want to reset these settings to defaults?', 'download-attachments'),
-				'resetDownloadsToDefaults' => __('Are you sure you want to reset number of downloads of all attachments?', 'download-attachments')
-			)
-		);
-		
-		$columns = 0;
 
-		foreach($this->options['general']['backend_columns'] as $column => $bool)
-		{
-			if($bool === TRUE)
-				$columns++;
-		}
-
-		wp_localize_script(
-			'download-attachments-admin-post',
-			'daArgs',
-			array(
-				'addTitle' => __('Select Attachments', 'download-attachments'),
-				'editTitle' => __('Edit attachment', 'download-attachments'),
-				'buttonAddNewFile' => __('Add selected attachments', 'download-attachments'),
-				'buttonEditFile' => __('Save attachment', 'download-attachments'),
-				'noFiles' => __('No attachments added yet.', 'download-attachments'),
-				'deleteFile' => __('Do you want to remove this attachment?', 'download-attachments'),
-				'removeFile' => __('Remove', 'download-attachments'),
-				'editFile' => __('Edit', 'download-attachments'),
-				'activeColumns'	=> ($columns + 2),
-				'internalUnknownError' => __('Unexpected error occured. Please refresh the page and try again.', 'download-attachments'),
-				'library' => ($this->options['general']['library'] === 'all' ? 1 : 0),
-				'addNonce' => wp_create_nonce('da-add-file-nonce'),
-				'removeNonce' => wp_create_nonce('da-remove-file-nonce'),
-				'sortNonce' => wp_create_nonce('da-sort-file-nonce'),
-				'attachmentLink' => $this->options['general']['attachment_link']
-			)
-		);
-
-		//settings
+		// settings
 		if($page === 'settings_page_download-attachments-options')
 		{
+			wp_register_script(
+				'download-attachments-admin-settings',
+				DOWNLOAD_ATTACHMENTS_URL.'/js/admin-settings.js',
+				array('jquery')
+			);
+
+			wp_localize_script(
+				'download-attachments-admin-settings',
+				'daArgs',
+				array(
+					'resetToDefaults' => __('Are you sure you want to reset these settings to defaults?', 'download-attachments'),
+					'resetDownloadsToDefaults' => __('Are you sure you want to reset number of downloads of all attachments?', 'download-attachments')
+				)
+			);
+
 			wp_enqueue_script('download-attachments-admin-settings');
 			wp_enqueue_style('download-attachments-admin');
-			wp_enqueue_style('download-attachments-wplike');
 		}
-		//metabox
+		// metabox
 		elseif(in_array($page, array('post.php', 'post-new.php'), TRUE) && in_array(get_post_type(), array_keys($this->options['general']['post_types']), TRUE))
 		{
+			wp_register_script(
+				'download-attachments-admin-post',
+				DOWNLOAD_ATTACHMENTS_URL.'/js/admin-post.js',
+				array('jquery')
+			);
+
+			wp_register_script(
+				'download-attachments-admin-stupid-table-sort',
+				DOWNLOAD_ATTACHMENTS_URL.'/assets/stupid-jquery-table-sort/stupidtable.min.js',
+				array('jquery')
+			);
+
+			$columns = 0;
+
+			foreach($this->options['general']['backend_columns'] as $column => $bool)
+			{
+				if($bool === TRUE)
+					$columns++;
+			}
+
+			global $post;
+
+			wp_localize_script(
+				'download-attachments-admin-post',
+				'daArgs',
+				array(
+					'addTitle' => __('Select Attachments', 'download-attachments'),
+					'editTitle' => __('Edit attachment', 'download-attachments'),
+					'buttonAddNewFile' => __('Add selected attachments', 'download-attachments'),
+					'buttonEditFile' => __('Save attachment', 'download-attachments'),
+					'noFiles' => __('No attachments added yet.', 'download-attachments'),
+					'deleteFile' => __('Do you want to remove this attachment?', 'download-attachments'),
+					'removeFile' => __('Remove', 'download-attachments'),
+					'editFile' => __('Edit', 'download-attachments'),
+					'activeColumns'	=> ($columns + 3),
+					'internalUnknownError' => __('Unexpected error occured. Please refresh the page and try again.', 'download-attachments'),
+					'library' => ($this->options['general']['library'] === 'all' ? 1 : 0),
+					'addNonce' => wp_create_nonce('da-add-file-nonce-'.(isset($post->ID) ? $post->ID : 0)),
+					'saveNonce' => wp_create_nonce('da-save-files-nonce-'.(isset($post->ID) ? $post->ID : 0)),
+					'attachmentLink' => $this->options['general']['attachment_link']
+				)
+			);
+
 			wp_enqueue_media();
 			wp_enqueue_style('download-attachments-admin');
 			wp_enqueue_script('download-attachments-admin-post');
+			wp_enqueue_script('download-attachments-admin-stupid-table-sort');
 		}
 	}
 
@@ -414,16 +412,16 @@ class Download_Attachments
 	/**
 	 * Adds scripts and styles to frontend
 	*/
-	public function front_scripts_styles() 
+	public function frontend_scripts_styles() 
 	{
 		if($this->options['general']['use_css_style'] === TRUE)
 		{
 			wp_register_style(
-				'download-attachments-front',
-				DOWNLOAD_ATTACHMENTS_URL.'/css/front.css'
+				'download-attachments-frontend',
+				DOWNLOAD_ATTACHMENTS_URL.'/css/frontend.css'
 			);
 
-			wp_enqueue_style('download-attachments-front');
+			wp_enqueue_style('download-attachments-frontend');
 		}
 	}
 

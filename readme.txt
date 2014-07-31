@@ -2,9 +2,9 @@
 Contributors: dfactory
 Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
-Requires at least: 3.5
+Requires at least: 3.9
 Tested up to: 3.9.1
-Stable tag: 1.0.10
+Stable tag: 1.1.0
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -21,12 +21,14 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 * Automatic or manual download links display
 * Select post types where Download Attachments should be used
 * Downloads count
+* Advanced attachments sorting
 * Drag & drop files ordering
 * Based on Media Library attachments
 * Easy customisation of Frontend & Backend display
 * Pretty URLs for download links
 * Custom download slug
 * Custom permission for metabox display
+* Option to exclude selected attachments from display
 * Option to select from all Media Library files or only those attached to a post
 * 2 shortcodes
 * 5 functions and multiple filter hooks for developers
@@ -60,6 +62,11 @@ No questions yet.
 3. screenshot-3.png
 
 == Changelog ==
+
+= 1.1.0 =
+* New: Advanced attachments sorting - sponsored by [Capitol City Janitorial](http://www.ccjanitorial.com/)
+* New: Option to exclude selected attachments from display - sponsored by [Capitol City Janitorial](http://www.ccjanitorial.com/)
+* Tweak: UI adjusted to native WP interface
 
 = 1.0.10 =
 * Fix: Important attachments query optimization and general plugin performance, especially on sites with large number of attachments
@@ -98,5 +105,7 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.0.10 =
-* Fix: Important attachments query optimization and general plugin performance, especially on sites with large number of attachments
+= 1.1.0 =
+* New: Advanced attachments sorting
+* New: Option to exclude selected attachments from display
+* Tweak: UI adjusted to native WP interface

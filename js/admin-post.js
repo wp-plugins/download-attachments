@@ -3,6 +3,8 @@ jQuery(document).ready(function($) {
 	var daEditFrame = null,
 		daAddFrame = null;
 
+
+	// modal window settings
 	daAddFrame = wp.media({
 		frame: 'select',
 		title : daArgs.addTitle,
@@ -19,54 +21,8 @@ jQuery(document).ready(function($) {
 		]
 	});
 
-	function selectAttachments(activate) {
-		var contentItem = daAddFrame.content.get().$el;
 
-		if(collection = daAddFrame.content.get().collection) {
-			if(activate === true) {
-				var liItem = contentItem.find('.attachments > .attachment:eq('+(collection.length - 1)+')');
-
-				if($('#da-files tbody tr[id="att-'+collection.last().id+'"]').length === 1) {
-					liItem.addClass('hidden-attachment');
-					liItem.removeClass('details');
-					liItem.removeClass('selected');
-					liItem.find('a.check').hide().attr('rel', 'da-hidden');
-				} else {
-					if(liItem.find('a.check').attr('rel') === 'da-hidden') {
-						liItem.find('a.check').attr('rel', '');
-						liItem.removeClass('hidden-attachment');
-					}
-				}
-			} else {
-				collection.each(function(item, count) {
-					var liItem = contentItem.find('.attachments > .attachment:eq('+count+')');
-
-					if($('#da-files tbody tr[id="att-'+item.id+'"]').length === 1) {
-						liItem.addClass('hidden-attachment');
-						liItem.removeClass('details');
-						liItem.removeClass('selected');
-						liItem.find('a.check').hide().attr('rel', 'da-hidden');
-					} else {
-						if(liItem.find('a.check').attr('rel') === 'da-hidden') {
-							liItem.find('a.check').attr('rel', '');
-							liItem.removeClass('hidden-attachment');
-						}
-					}
-				});
-			}
-		}
-	}
-
-	/*
-	daAddFrame.on('content:activate', function() {
-		setTimeout(function() {
-			daAddFrame.content.get().collection.on('add', function() {
-				selectAttachments(true);
-			});
-		}, 0);
-	});
-	*/
-
+	// opens modal window
 	daAddFrame.on('open', function() {
 		var selection = daAddFrame.state().get('selection'),
 			id,
@@ -83,90 +39,103 @@ jQuery(document).ready(function($) {
 				selection.add(attachment ? [attachment] : []);
 			}
 		});
-
-		//selectAttachments(false);
 	});
 
+
+	// closes modal window
 	daAddFrame.on('close', function() {
-		$('#da-add-new-file a').attr('disabled', false);
+		$('#da-add-new-file input').prop('disabled', false);
 	});
 
+
+	// after files were selected in modal window
 	daAddFrame.on('select', function() {
 		var library = daAddFrame.state().get('selection'),
-			ids = library.pluck('id');
+			ids = library.pluck('id'),
+			attachments = [];
 
-		$('#da-spinner').fadeIn(300);
+		$.each($('#da-files tbody tr[id^="att"]'), function(i) {
+			id = $(this).attr('id').split('-')[1];
 
-		$.post(ajaxurl, {
-			action: 'da-new-file',
-			danonce: daArgs.addNonce,
-			html: daAddFrame.link,
-			post_id: wp.media.view.settings.post.id,
-			attachments_ids: ids
-		}).done(function(data) {
-			try {
-				var json = $.parseJSON(data);
+			if(id !== '') {
+				attachments[i] = parseInt(id);
+			}
+		});
 
-				if(json.status === 'OK') {
-					var infoRow = $('#da-files tbody tr#da-info');
+		var attachments_add = $.grep(ids, function(i) {return $.inArray(i, attachments) < 0}),
+			attachments_remove = $.grep(attachments, function(i) {return $.inArray(i, ids) < 0});
 
-					//if no files
-					if(infoRow.length === 1) {
-						infoRow.fadeOut(300, function() {
-							$(this).remove();
+		if(attachments_add.length > 0) {
+			$('#da-spinner').fadeIn(300);
+
+			$.post(ajaxurl, {
+				action: 'da-new-file',
+				danonce: daArgs.addNonce,
+				html: daAddFrame.link,
+				post_id: wp.media.view.settings.post.id,
+				attachments_ids: (attachments_add.length > 0 ? attachments_add : ['empty']),
+			}).done(function(data) {
+				try {
+					var json = $.parseJSON(data);
+
+					if(json.status === 'OK') {
+						var infoRow = $('#da-files tbody tr#da-info');
+
+						// if no files
+						if(infoRow.length === 1) {
+							infoRow.fadeOut(300, function() {
+								$(this).remove();
+								$('#da-files tbody').append(json.files);
+								$('#da-files tbody tr').fadeIn(300);
+							});
+						} else {
 							$('#da-files tbody').append(json.files);
 							$('#da-files tbody tr').fadeIn(300);
-						});
+						}
+
+						$('#da-infobox').html('').fadeOut(300);
 					} else {
-						$('#da-files tbody').append(json.files);
-						$('#da-files tbody tr').fadeIn(300);
-					}
-
-					if(json.remove !== '') {
-						var deletedAtts = json.remove.split(',');
-
-						for(i in deletedAtts) {
-							$('tr#att-'+deletedAtts[i]).fadeOut(300, function() {
-								$(this).remove();
-							});
+						if(json.info !== '') {
+							$('#da-infobox').html(json.info).fadeIn(300);
+						} else {
+							$('#da-infobox').html('').fadeOut(300);
 						}
 					}
-
-					/*
-					if(infoRow.length === 0) {
-						$('#da-files tbody').hide().append('<tr id="da-info"><td colspan="'+daArgs.activeColumns+'">'+daArgs.noFiles+'</td></tr>').fadeIn(300);
-					}
-					*/
-
-					$('#da-infobox').html('').fadeOut(300);
-				} else {
-					if(json.info !== '') {
-						$('#da-infobox').html(json.info).fadeIn(300);
-					} else {
-						$('#da-infobox').html('').fadeOut(300);
-					}
+				} catch (e) {
+					$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
 				}
-			} catch (e) {
-				$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
-			}
 
-			$('#da-spinner').fadeOut(300);
-		}).fail(function() {
-			$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
-			$('#da-spinner').fadeOut(300);
-		});
+				$('#da-spinner').fadeOut(300);
+			}).fail(function() {
+				$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
+				$('#da-spinner').fadeOut(300);
+			});
+		}
+
+		if(attachments_remove.length > 0) {
+			// removes deselected attachments
+			$.each(attachments_remove, function(i, id) {
+				$('tr#att-'+id).fadeOut(300, function() {
+					$(this).remove();
+				});
+			});
+		}
 	});
 
-	$(document).on('click', '#da-add-new-file a', function() {
-		if($(this).attr('disabled') === 'disabled') {
+
+	// runs modal window with attachments
+	$(document).on('click', '#da-add-new-file input', function() {
+		if($(this).is(':disabled')) {
 			return false;
 		}
 
-		$(this).attr('disabled', true);
+		$(this).prop('disabled', true);
 
 		daAddFrame.open();
 	});
 
+
+	// edits file
 	$(document).on('click', '.da-edit-file', function() {
 		if(daArgs.attachmentLink === 'modal') {
 			var fileID = parseInt($(this).closest('tr[id^="att"]').attr('id').split('-')[1]),
@@ -223,59 +192,84 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	
+	// removes file
 	$(document).on('click', '.da-remove-file', function() {
 		if(confirm(daArgs.deleteFile)) {
-			var button = $('#da-add-new-file a'),
-				fileID = parseInt($(this).closest('tr').attr('id').split('-')[1]),
-				postID = parseInt($(this).closest('table').attr('rel'));
+			$('tr#att-'+parseInt($(this).closest('tr[id^="att"]').attr('id').split('-')[1])).fadeOut(300, function() {
+				$(this).remove();
 
-			$('#da-spinner').fadeIn(300);
-			$('tr#att-'+fileID).addClass('remove');
-			$('tr#att-'+fileID+' td.file-actions a').attr('disabled', true);
-			$('tr#att-'+fileID+' td.file-actions span').attr('disabled', true);
-
-			$.post(ajaxurl, {
-				action: 'da-remove-file',
-				attachment_id: fileID,
-				post_id: postID,
-				danonce: daArgs.removeNonce
-			}).done(function(data) {
-				try {
-					var json = $.parseJSON(data);
-
-					if(json.status === 'OK') {
-						$('tr#att-'+fileID).fadeOut(300, function() {
-							$(this).remove();
-
-							if($('#da-files tbody tr').length === 0) {
-								$('#da-files tbody').hide().append('<tr id="da-info"><td colspan="'+daArgs.activeColumns+'">'+daArgs.noFiles+'</td></tr>').fadeIn(300);
-							}
-						});
-
-						$('#da-infobox').html('').fadeOut(300);
-					} else {
-						if(json.info !== '') {
-							$('#da-infobox').html(json.info).fadeIn(300);
-						} else {
-							$('#da-infobox').html('').fadeOut(300);
-						}
-					}
-				} catch (e) {
-					$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
+				if($('#da-files tbody tr').length === 0) {
+					$('#da-files tbody').hide().append('<tr id="da-info"><td colspan="'+daArgs.activeColumns+'">'+daArgs.noFiles+'</td></tr>').fadeIn(300);
 				}
-
-				$('#da-spinner').fadeOut(300);
-				button.attr('disabled', false);
-			}).fail(function() {
-				$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
-				$('#da-spinner').fadeOut(300);
-				button.attr('disabled', false);
 			});
         }
 
 		return false;
 	});
 
+
+	// saves the list with files
+	$(document).on('click', '.da-save-files', function() {
+		if($(this).find('input').is(':disabled')) {
+			return false;
+		}
+
+		var attachments = [],
+			postID = parseInt($('#da-files').attr('rel'));
+
+		// displays spinner
+		$('p.da-save-files input').prop('disabled', true);
+
+		// deactivates buttons
+		$('#da-spinner').fadeIn(300);
+
+		// gets attachments data
+		$.each($('#da-files tr[id^="att"]'), function(i) {
+			attachments[i] = [parseInt($(this).attr('id').split('-')[1]), ($(this).find('td.file-exclude input.exclude-attachment').is(':checked') === true ? 1 : 0)];
+		});
+
+		$.post(ajaxurl, {
+			action: 'da-save-files',
+			attachment_data: (attachments.length > 0 ? attachments : ['empty']),
+			post_id: postID,
+			danonce: daArgs.saveNonce
+		}).done(function(data) {
+			try {
+				var json = $.parseJSON(data);
+
+				// everything went fine?
+				if(json.status === 'OK') {
+					$('#da-infobox').html('').fadeOut(300);
+				} else if(json.info !== '') {
+					$('#da-infobox').html(json.info).fadeIn(300);
+				}
+			} catch (e) {
+				// displays error
+				$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
+			}
+
+			// hides spinner
+			$('#da-spinner').fadeOut(300);
+
+			// activates buttons
+			$('p.da-save-files input').prop('disabled', false);
+		}).fail(function() {
+			// displays error
+			$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
+
+			// hides spinner
+			$('#da-spinner').fadeOut(300);
+
+			// activates buttons
+			$('p.da-save-files input').prop('disabled', false);
+		});
+
+		return false;
+	});
+
+
+	// makes attachments draggable
 	$('#da-files tbody').sortable({
 		axis: 'y',
 		cursor: 'move',
@@ -300,54 +294,27 @@ jQuery(document).ready(function($) {
 			return helper;
 		},
 		start: function(e, ui) {
-			$('#da-add-new-file a').attr('disabled', true);
-		},
-		update: function(e, ui) {
-			$('#da-spinner').fadeIn(300);
+			$('#da-add-new-file input').prop('disabled', true);
+			$('p.da-save-files input').prop('disabled', true);
 		},
 		stop: function(e, ui) {
-			$('#da-spinner').fadeOut(300);
-			$('#da-add-new-file a').attr('disabled', false);
-		},
-		beforeStop: function(e, ui) {
-			var newOrder = [];
-
-			$.each($('#da-files tr[id^="att"]'), function(i) {
-				newOrder[i] = parseInt($(this).attr('id').split('-')[1]);
-			});
-
-            var postID = parseInt($(this).closest('table').attr('rel'));
-
-			$.post(ajaxurl, {
-				action: 'da-change-order',
-				post_id: postID,
-				attachments_ids: newOrder,
-				danonce: daArgs.sortNonce
-			}).done(function(data) {
-				try {
-					var json = $.parseJSON(data);
-
-					if(json.status === 'OK') {
-						$('#da-infobox').html('').fadeOut(300);
-					}
-
-					if(json.info !== '' && json.ids.length > 0) {
-						$('#da-infobox').html(json.info).fadeIn(300);
-
-						for(i in json.ids) {
-							$('tr#att-'+json.ids[i]).fadeOut(300, function() {
-								$(this).remove();
-							});
-						}
-					} else {
-						$('#da-infobox').html('').fadeOut(300);
-					}
-				} catch (e) {
-					$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
-				}
-			}).fail(function() {
-				$('#da-infobox').html(daArgs.internalUnknownError).fadeIn(300);
-			});
+			$('#da-add-new-file input').prop('disabled', false);
+			$('p.da-save-files input').prop('disabled', false);
 		}
 	});
+
+
+	// makes table sortable by columns
+	$('#da-files').stupidtable({
+		"alphanum": function(a,b) {
+console.log(1);
+		var pattern = "^[A-Z](\\d+)$";
+		var re = new RegExp(pattern);
+
+		var aNum = re.exec(a).slice(1);
+		var bNum = re.exec(b).slice(1);
+
+		return parseInt(aNum,10) - parseInt(bNum,10);
+		}
+	})
 });

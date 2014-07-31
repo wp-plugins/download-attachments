@@ -21,10 +21,17 @@
 }
 
 /* Table */
-#da-add-new-file { float: left; margin: 5px 0 11px 0; }
+#da-add-new-file { float: left; margin: 5px 0 11px 9px; }
+.da-save-files { float: left; margin: 5px 0 0 0; }
+#da-infobox { clear: both; margin: 10px 0 0 0; }
 #da-info td { text-align: center; }
-#da-files td.file-drag { cursor: move; background: url("../images/drag.png") no-repeat center 6px; width: 20px;}
-#da-files td.file-title { word-break: break-all; word-wrap: break-word; width: 50%; }
+#da-files { margin-bottom: 6px; }
+#da-files th[data-sort] { cursor: pointer; }
+#da-files th[data-sort]:hover {}
+#da-files th.sorting-asc:after { content: "\f142"; padding-left: 10px; font-family: 'Dashicons'; }
+#da-files th.sorting-desc:after { content: "\f140"; padding-left: 10px; font-family: 'Dashicons'; }
+#da-files td.file-drag { cursor: move; width: 20px; }
+#da-files td.file-title { word-break: break-all; word-wrap: break-word; width: 40%; }
 #da-files td.file-title span { display: block; }
 #da-files td.file-title p { margin: 0; }
 #da-files td.file-actions a, #da-files td.file-actions span { margin-bottom: 3px; }

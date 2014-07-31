@@ -1,5 +1,5 @@
 <?php
-if(!defined('ABSPATH'))	exit; //exit if accessed directly
+if(!defined('ABSPATH'))	exit;
 
 function da_get_download_attachments($post_id = 0, $args = array())
 {
@@ -18,7 +18,7 @@ function da_get_download_attachments($post_id = 0, $args = array())
 
 	$args = array_merge($defaults, $args);
 
-	//include
+	// include
 	if(is_array($args['include']) && !empty($args['include']))
 	{
 		$ids = array();
@@ -32,14 +32,14 @@ function da_get_download_attachments($post_id = 0, $args = array())
 	}
 	elseif(is_numeric($args['include']))
 		$args['include'] = array((int)$args['include']);
-	//shortcode
+	// shortcode
 	elseif(is_string($args['include']) && !empty($args['include']))
-		$args['include'] = json_decode('['.$args['include'].']', TRUE);
+		$args['include'] = json_decode('['.$args['include'].']', true);
 	else
 	{
 		$args['include'] = $defaults['include'];
 
-		//exclude
+		// exclude
 		if(is_array($args['exclude']) && !empty($args['exclude']))
 		{
 			$ids = array();
@@ -54,46 +54,47 @@ function da_get_download_attachments($post_id = 0, $args = array())
 		elseif(is_numeric($args['exclude']))
 			$args['exclude'] = array((int)$args['exclude']);
 		elseif(is_string($args['exclude']) && !empty($args['exclude']))
-			$args['exclude'] = json_decode('['.$args['exclude'].']', TRUE);
+			$args['exclude'] = json_decode('['.$args['exclude'].']', true);
 		else
 			$args['exclude'] = $defaults['exclude'];
 	}
 
-	//order
-	$args['orderby'] = (in_array($args['orderby'], array('menu_order', 'attachment_id', 'attachment_date', 'attachment_title', 'attachment_size', 'attachment_downloads'), TRUE) ? $args['orderby'] : $defaults['orderby']);
-	$args['order'] = (in_array($args['order'], array('asc', 'desc'), TRUE) ? $args['order'] : $defaults['order']);
+	// order
+	$args['orderby'] = (in_array($args['orderby'], array('menu_order', 'attachment_id', 'attachment_date', 'attachment_title', 'attachment_size', 'attachment_downloads'), true) ? $args['orderby'] : $defaults['orderby']);
+	$args['order'] = (in_array($args['order'], array('asc', 'desc'), true) ? $args['order'] : $defaults['order']);
 
 	$files = array();
 
-	if(($files_meta = get_post_meta($post_id, '_da_attachments', TRUE)) !== '' && is_array($files_meta) && !empty($files_meta))
+	if(($files_meta = get_post_meta($post_id, '_da_attachments', true)) !== '' && is_array($files_meta) && !empty($files_meta))
 	{
 		foreach($files_meta as $file)
 		{
-			$add = FALSE;
+			$add = false;
 
-			//all
+			// all
 			if(empty($args['include']) && empty($args['exclude']))
-				$add = TRUE;
-			//include
+				$add = true;
+			// include
 			elseif(!empty($args['include']) && empty($args['exclude']) && in_array($file['file_id'], $args['include']))
-				$add = TRUE;
-			//exclude
+				$add = true;
+			// exclude
 			elseif(empty($args['include']) && !empty($args['exclude']))
 			{
-				$add = TRUE;
+				$add = true;
 
 				if(in_array($file['file_id'], $args['exclude']))
-					$add = FALSE;
+					$add = false;
 			}
 
-			if($add === TRUE)
+			if($add)
 			{
 				$files[$file['file_id']] = array(
 					'attachment_id' => $file['file_id'],
 					'attachment_date' => $file['file_date'],
 					'attachment_user_id' => $file['file_user_id'],
+					'attachment_exclude' => (isset($file['file_exclude']) && $file['file_exclude'] === true ? true : false),
 					'attachment_user_name' => get_the_author_meta('display_name', $file['file_user_id']),
-					'attachment_downloads' => (int)get_post_meta($file['file_id'], '_da_downloads', TRUE)
+					'attachment_downloads' => (int)get_post_meta($file['file_id'], '_da_downloads', true)
 				);
 			}
 		}
@@ -137,7 +138,7 @@ function da_get_download_attachments($post_id = 0, $args = array())
 		}
 	}
 
-	//multiarray sorting
+	// multiarray sorting
 	if($args['orderby'] !== 'menu_order')
 	{
 		$sort_array = array();
@@ -149,10 +150,10 @@ function da_get_download_attachments($post_id = 0, $args = array())
 
 		$order = ($args['order'] === 'asc' ? SORT_ASC : SORT_DESC);
 
-		array_multisort($files, SORT_NUMERIC, $order, $sort_array, (in_array($args['orderby'], array('attachment_id', 'attachment_size', 'attachment_downloads'), TRUE) ? SORT_NUMERIC : SORT_STRING), $order);
+		array_multisort($files, SORT_NUMERIC, $order, $sort_array, (in_array($args['orderby'], array('attachment_id', 'attachment_size', 'attachment_downloads'), true) ? SORT_NUMERIC : SORT_STRING), $order);
 	}
 
-	//we need to format raw data
+	// we need to format raw data
 	foreach($files as $key => $row)
 	{
 		$files[$key]['attachment_date'] = date_i18n(get_option('date_format').' '.get_option('time_format'), strtotime($row['attachment_date']));
@@ -165,7 +166,7 @@ function da_get_download_attachments($post_id = 0, $args = array())
 
 function da_display_download_attachments($post_id = 0, $args = array())
 {
-	if($post_id === NULL)
+	if($post_id === null)
 	{
 		$post = get_post();
 		$post_id = (isset($post->ID) ? $post->ID : 0);
@@ -251,6 +252,9 @@ function da_display_download_attachments($post_id = 0, $args = array())
 
 		foreach($attachments as $attachment)
 		{
+			if($attachment['attachment_exclude'])
+				continue;
+
 			if($args['use_desc_for_title'] === 1 && $attachment['attachment_description'] !== '')
 				$title = apply_filters('da_display_attachment_title', $attachment['attachment_description']);
 			else

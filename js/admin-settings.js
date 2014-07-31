@@ -1,7 +1,5 @@
 jQuery(document).ready(function($) {
 
-	$('.wplikebtns').buttonset();
-
 	$(document).on('click', 'input#reset_da_general', function() {
 		return confirm(daArgs.resetToDefaults);
 	});
