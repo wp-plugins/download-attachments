@@ -3,11 +3,7 @@ if(!defined('ABSPATH'))	exit;
 
 function da_get_download_attachments($post_id = 0, $args = array())
 {
-	if(empty($post_id))
-	{
-		$post = get_post();
-		$post_id = (isset($post->ID) ? $post->ID : 0);
-	}
+	$post_id = (int)(empty($post_id) ? get_the_ID() : $post_id);
 
 	$defaults = array(
 		'include' => array(),
@@ -166,11 +162,7 @@ function da_get_download_attachments($post_id = 0, $args = array())
 
 function da_display_download_attachments($post_id = 0, $args = array())
 {
-	if($post_id === null)
-	{
-		$post = get_post();
-		$post_id = (isset($post->ID) ? $post->ID : 0);
-	}
+	$post_id = (int)(empty($post_id) ? get_the_ID() : $post_id);
 
 	$options = get_option('download_attachments_general');
 
@@ -210,9 +202,9 @@ function da_display_download_attachments($post_id = 0, $args = array())
 	$args['display_empty'] = apply_filters('da_display_attachments_empty', (int)$args['display_empty']);
 	$args['use_desc_for_title'] = (int)$args['use_desc_for_title'];
 	$args['echo'] = (int)$args['echo'];
-	$args['style'] = (in_array($args['style'], array('list', 'none', ''), TRUE) ? $args['style'] : $defaults['style']);
-	$args['orderby'] = (in_array($args['orderby'], array('menu_order', 'attachment_id', 'attachment_date', 'attachment_title', 'attachment_size', 'attachment_downloads'), TRUE) ? $args['orderby'] : $defaults['orderby']);
-	$args['order'] = (in_array($args['order'], array('asc', 'desc'), TRUE) ? $args['order'] : $defaults['order']);
+	$args['style'] = (in_array($args['style'], array('list', 'none', ''), true) ? $args['style'] : $defaults['style']);
+	$args['orderby'] = (in_array($args['orderby'], array('menu_order', 'attachment_id', 'attachment_date', 'attachment_title', 'attachment_size', 'attachment_downloads'), true) ? $args['orderby'] : $defaults['orderby']);
+	$args['order'] = (in_array($args['order'], array('asc', 'desc'), true) ? $args['order'] : $defaults['order']);
 	$args['link_before'] = trim($args['link_before']);
 	$args['link_after'] = trim($args['link_after']);
 	$args['display_option_none'] = (($info = trim($args['display_option_none'])) !== '' ? $info : $defaults['display_option_none']);
@@ -275,7 +267,7 @@ function da_display_download_attachments($post_id = 0, $args = array())
 				$html .= '<span class="attachment-link-before">'.$args['link_before'].'</span>';
 
 			//link
-			$html .= '<a href="'.($options['pretty_urls'] === TRUE ? site_url('/'.$options['download_link'].'/'.$attachment['attachment_id'].'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment['attachment_id'])).'" class="attachment-link" title="'.$title.'">'.$title.'</a>';
+			$html .= '<a href="'.($options['pretty_urls'] === true ? site_url('/'.$options['download_link'].'/'.$attachment['attachment_id'].'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment['attachment_id'])).'" class="attachment-link" title="'.$title.'">'.$title.'</a>';
 
 			//link after
 			if($args['link_after'] !== '')
@@ -327,22 +319,22 @@ function da_display_download_attachments($post_id = 0, $args = array())
 }
 
 
-function da_download_attachment_link($attachment_id = 0, $display = FALSE)
+function da_download_attachment_link($attachment_id = 0, $display = false)
 {
 	if(get_post_type($attachment_id) === 'attachment')
 	{
 		$options = get_option('download_attachments_general');
 		$title = get_the_title($attachment_id);
 
-		$link = '<a href="'.($options['pretty_urls'] === TRUE ? site_url('/'.$options['download_link'].'/'.$attachment_id.'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment_id)).'" title="'.$title.'">'.$title.'</a>';
+		$link = '<a href="'.($options['pretty_urls'] === true ? site_url('/'.$options['download_link'].'/'.$attachment_id.'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment_id)).'" title="'.$title.'">'.$title.'</a>';
 	}
 	else
 		$link = '';
 
-	if($display === TRUE)
-		echo $link;
+	if($display === true)
+		echo apply_filters('da_download_attachment_link', $link);
 	else
-		return $link;
+		return apply_filters('da_download_attachment_link', $link);
 }
 
 

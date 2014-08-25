@@ -3,8 +3,8 @@ Contributors: dfactory
 Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.9
-Tested up to: 3.9.1
-Stable tag: 1.1.0
+Tested up to: 3.9.2
+Stable tag: 1.1.1
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -40,6 +40,7 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 
 * Danish - by Martin Schulze
 * Dutch - by [Sebas Blom](http://www.basbva.nl/)
+* German - by [Sascha Brendel](http://sascha-brendel.de/blog/)
 * Greek - by vas gargan
 * Polish - by Bartosz Arendt
 * Russian - by Semion Zuev
@@ -62,6 +63,9 @@ No questions yet.
 3. screenshot-3.png
 
 == Changelog ==
+
+= 1.1.1 =
+* New: German translation, thanks to [Sascha Brendel](http://sascha-brendel.de/blog/)
 
 = 1.1.0 =
 * New: Advanced attachments sorting - sponsored by [Capitol City Janitorial](http://www.ccjanitorial.com/)
@@ -105,7 +109,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.1.0 =
-* New: Advanced attachments sorting
-* New: Option to exclude selected attachments from display
-* Tweak: UI adjusted to native WP interface
+= 1.1.1 =
+* New: German translation, thanks to [Sascha Brendel](http://sascha-brendel.de/blog/)

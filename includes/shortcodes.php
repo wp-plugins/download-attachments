@@ -38,6 +38,8 @@ class Download_Attachments_Shortcodes
 	*/
 	public function download_attachments_shortcode($args)
 	{
+		$post_id = (int)(empty($post_id) ? get_the_ID() : $post_id);
+		
 		$defaults = array(
 			'container' => 'div',
 			'container_class' => 'download-attachments',
@@ -74,7 +76,7 @@ class Download_Attachments_Shortcodes
 			$args['title'] = $this->options['general']['label'];
 		}
 
-		return da_display_download_attachments((int)get_queried_object_id(), shortcode_atts($defaults, $args));
+		return da_display_download_attachments($post_id, shortcode_atts($defaults, $args));
 	}
 
 

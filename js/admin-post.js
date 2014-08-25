@@ -305,16 +305,5 @@ jQuery(document).ready(function($) {
 
 
 	// makes table sortable by columns
-	$('#da-files').stupidtable({
-		"alphanum": function(a,b) {
-console.log(1);
-		var pattern = "^[A-Z](\\d+)$";
-		var re = new RegExp(pattern);
-
-		var aNum = re.exec(a).slice(1);
-		var bNum = re.exec(b).slice(1);
-
-		return parseInt(aNum,10) - parseInt(bNum,10);
-		}
-	})
+	$('#da-files').stupidtable();
 });
