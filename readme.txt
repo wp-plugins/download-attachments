@@ -3,8 +3,8 @@ Contributors: dfactory
 Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.9
-Tested up to: 3.9.2
-Stable tag: 1.1.1
+Tested up to: 4.0.1
+Stable tag: 1.2.0
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -20,6 +20,7 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 
 * Automatic or manual download links display
 * Select post types where Download Attachments should be used
+* Select list or table display style
 * Downloads count
 * Advanced attachments sorting
 * Drag & drop files ordering
@@ -63,6 +64,13 @@ No questions yet.
 3. screenshot-3.png
 
 == Changelog ==
+
+= 1.2.0 =
+* New: Select list or table display style
+* New: Option to display attached file index
+
+= 1.1.2 =
+* New: Option to donate this plugin :)
 
 = 1.1.1 =
 * New: German translation, thanks to [Sascha Brendel](http://sascha-brendel.de/blog/)
@@ -109,5 +117,6 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.1.1 =
-* New: German translation, thanks to [Sascha Brendel](http://sascha-brendel.de/blog/)
+= 1.2.0 =
+* New: Select list or table display style
+* New: Option to display attached file index

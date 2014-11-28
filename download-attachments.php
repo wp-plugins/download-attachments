@@ -2,7 +2,7 @@
 /*
 Plugin Name: Download Attachments
 Description: Download Attachments is a new approach to managing downloads in WordPress. It allows you to easily add and display download links in any post or page.
-Version: 1.1.1
+Version: 1.2.0
 Author: dFactory
 Author URI: http://www.dfactory.eu/
 Plugin URI: http://www.dfactory.eu/plugins/download-attachments/
@@ -41,44 +41,46 @@ class Download_Attachments
 	private $options = array();
 	private $defaults = array(
 		'general' => array(
-			'pretty_urls' => FALSE,
-			'use_css_style' => TRUE,
+			'pretty_urls' => false,
+			'use_css_style' => true,
 			'download_link' => 'download-attachment',
 			'attachment_link' => 'modal',
 			'download_box_display' => 'after_content',
 			'library' => 'all',
-			'downloads_in_media_library' => TRUE,
-			'deactivation_delete' => FALSE,
+			'downloads_in_media_library' => true,
+			'deactivation_delete' => false,
+			'display_style' => 'list',
 			'label' => 'Download Attachments',
 			'post_types' => array(),
 			'backend_columns' => array(
-				'id' => TRUE,
-				'author' => FALSE,
-				'type' => TRUE,
-				'size' => TRUE,
-				'date' => FALSE,
-				'downloads' => TRUE
+				'id' => true,
+				'author' => false,
+				'type' => true,
+				'size' => true,
+				'date' => false,
+				'downloads' => true
 			),
 			'frontend_columns' => array(
-				'author' => FALSE,
-				'icon' => TRUE,
-				'size' => TRUE,
-				'date' => FALSE,
-				'downloads' => TRUE
+				'index' => false,
+				'author' => false,
+				'icon' => true,
+				'size' => true,
+				'date' => false,
+				'downloads' => true
 			),
 			'backend_content' => array(
-				'caption' => TRUE,
-				'description' => FALSE
+				'caption' => true,
+				'description' => false
 			),
 			'frontend_content' => array(
-				'caption' => TRUE,
-				'description' => FALSE
+				'caption' => true,
+				'description' => false
 			),
 			'capabilities' => array(
 				'manage_download_attachments'
 			)
 		),
-		'version' => '1.1.1'
+		'version' => '1.2.0'
 	);
 
 
@@ -176,15 +178,15 @@ class Download_Attachments
 			$current_blog_id = $wpdb->blogid;
 			$blogs_ids = $wpdb->get_col($wpdb->prepare('SELECT blog_id FROM '.$wpdb->blogs, ''));
 
-			if(($activated_blogs = get_site_option('download_attachments_activated_blogs', FALSE, FALSE)) === FALSE)
+			if(($activated_blogs = get_site_option('download_attachments_activated_blogs', false, false)) === false)
 				$activated_blogs = array();
 
 			foreach($blogs_ids as $blog_id)
 			{
 				switch_to_blog($blog_id);
-				$this->deactivate_single(TRUE);
+				$this->deactivate_single(true);
 
-				if(in_array((int)$blog_id, $activated_blogs, TRUE))
+				if(in_array((int)$blog_id, $activated_blogs, true))
 					unset($activated_blogs[array_search($blog_id, $activated_blogs)]);
 			}
 
@@ -251,6 +253,7 @@ class Download_Attachments
 	public function pass_variables()
 	{
 		$this->columns = array(
+			'index' => __('Index', 'download-attachments'),
 			'id' => __('ID', 'download-attachments'),
 			'exclude' => __('Exclude', 'download-attachments'),
 			'author' => __('Added by', 'download-attachments'),
@@ -269,7 +272,7 @@ class Download_Attachments
 	*/
 	public function load_textdomain()
 	{
-		load_plugin_textdomain('download-attachments', FALSE, DOWNLOAD_ATTACHMENTS_REL_PATH.'languages/');
+		load_plugin_textdomain('download-attachments', false, DOWNLOAD_ATTACHMENTS_REL_PATH.'languages/');
 	}
 
 
@@ -290,7 +293,7 @@ class Download_Attachments
 	*/
 	public function add_content($content)
 	{
-		if(!is_singular() || !in_array(get_post_type(), array_keys($this->options['general']['post_types'], TRUE)) || $this->options['general']['download_box_display'] === 'manually')
+		if(!is_singular() || !in_array(get_post_type(), array_keys($this->options['general']['post_types'], true)) || $this->options['general']['download_box_display'] === 'manually')
 			return $content;
 
 		$args = '';
@@ -302,15 +305,15 @@ class Download_Attachments
 				case 'icon':
 				case 'size':
 				case 'date':
-					$args .= ' display_'.$column.'="'.($bool === TRUE ? 1 : 0).'"';
+					$args .= ' display_'.$column.'="'.($bool === true ? 1 : 0).'"';
 					break;
 
 				case 'author':
-					$args .= ' display_user="'.($bool === TRUE ? 1 : 0).'"';
+					$args .= ' display_user="'.($bool === true ? 1 : 0).'"';
 					break;
 
 				case 'downloads':
-					$args .= ' display_count="'.($bool === TRUE ? 1 : 0).'"';
+					$args .= ' display_count="'.($bool === true ? 1 : 0).'"';
 					break;
 			}
 		}
@@ -356,7 +359,7 @@ class Download_Attachments
 			wp_enqueue_style('download-attachments-admin');
 		}
 		// metabox
-		elseif(in_array($page, array('post.php', 'post-new.php'), TRUE) && in_array(get_post_type(), array_keys($this->options['general']['post_types']), TRUE))
+		elseif(in_array($page, array('post.php', 'post-new.php'), true) && in_array(get_post_type(), array_keys($this->options['general']['post_types']), true))
 		{
 			wp_register_script(
 				'download-attachments-admin-post',
@@ -374,7 +377,7 @@ class Download_Attachments
 
 			foreach($this->options['general']['backend_columns'] as $column => $bool)
 			{
-				if($bool === TRUE)
+				if($bool === true)
 					$columns++;
 			}
 
@@ -414,7 +417,7 @@ class Download_Attachments
 	*/
 	public function frontend_scripts_styles() 
 	{
-		if($this->options['general']['use_css_style'] === TRUE)
+		if($this->options['general']['use_css_style'] === true)
 		{
 			wp_register_style(
 				'download-attachments-frontend',

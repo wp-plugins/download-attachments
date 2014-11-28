@@ -44,7 +44,7 @@ class Download_Attachments_Shortcodes
 			'container' => 'div',
 			'container_class' => 'download-attachments',
 			'container_id' => '',
-			'style' => 'list',
+			'style' => isset($this->options['general']['display_style']) ? esc_attr($this->options['general']['display_style']) : 'list',
 			'link_before' => '',
 			'link_after' => '',
 			'display_user' => (int)$this->options['general']['frontend_columns']['author'],
