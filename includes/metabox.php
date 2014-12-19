@@ -280,7 +280,7 @@ class Download_Attachments_Metabox
 
 		foreach($this->columns as $column => $name)
 		{
-			if($column === 'exclude' || ($column !== 'icon' && $this->options['general']['backend_columns'][$column] === true))
+			if($column === 'exclude' || (!in_array($column, array('index', 'icon')) && $this->options['general']['backend_columns'][$column] === true))
 			{
 				switch($column)
 				{
@@ -475,7 +475,7 @@ class Download_Attachments_Metabox
 
 		foreach($this->columns as $column => $name)
 		{
-			if($column === 'exclude' || ($column != 'icon' && $this->options['general']['backend_columns'][$column] === true))
+			if($column === 'exclude' || (!in_array($column, array('index', 'icon')) && $this->options['general']['backend_columns'][$column] === true))
 			{
 				if($column === 'size')
 					$value = ' data-sort-value="'.$file['file_size_bytes'].'"';

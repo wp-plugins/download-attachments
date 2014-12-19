@@ -173,7 +173,9 @@ function da_display_download_attachments($post_id = 0, $args = array())
 		'style' => isset($options['display_style']) ? esc_attr($options['display_style']) : 'list',
 		'link_before' => '',
 		'link_after' => '',
-		'display_index' => (int)$options['frontend_columns']['index'],
+		'content_before' => '',
+		'content_after' => '',
+		'display_index' => isset($options['frontend_columns']['index']) ? (int)$options['frontend_columns']['index'] : false,
 		'display_user' => (int)$options['frontend_columns']['author'],
 		'display_icon' => (int)$options['frontend_columns']['icon'],
 		'display_count' => (int)$options['frontend_columns']['downloads'],
@@ -187,12 +189,13 @@ function da_display_download_attachments($post_id = 0, $args = array())
 		'exclude' => '',
 		'include' => '',
 		'title' => __('Download Attachments', 'download-attachments'),
+		'title_container' => 'p',
 		'orderby' => 'menu_order',
 		'order' => 'asc',
 		'echo' => 1
 	);
 
-	$args = array_merge($defaults, $args);
+	$args = apply_filters('da_display_attachments_defaults', array_merge($defaults, $args), $post_id);
 
 	$args['display_index'] = apply_filters('da_display_attachments_index', (int)$args['display_index']);
 	$args['display_user'] = apply_filters('da_display_attachments_user', (int)$args['display_user']);
@@ -238,8 +241,10 @@ function da_display_download_attachments($post_id = 0, $args = array())
 
 		//title
 		if($args['title'] !== '')
-			$html .= ($args['title'] !== '' ? '<p class="download-title">'.$args['title'].'</p>' : '');
+			$html .= ($args['title'] !== '' ? '<'.$args['title_container'].' class="download-title">'.$args['title'].'</'.$args['title_container'].'>' : '');
 	}
+	
+	$html .= $args['content_before'];
 
 	if($count > 0)
 	{
@@ -303,7 +308,8 @@ function da_display_download_attachments($post_id = 0, $args = array())
 				$html .= '<'.$item_container.' class="attachment-index">'.$i.'</'.$item_container.'> ';
 				
 			// title
-			$html .= '<td class="attachment-title">';
+			if($args['style'] === 'table')
+				$html .= '<td class="attachment-title">';
 
 			// type
 			if($args['display_icon'] === 1)
@@ -374,6 +380,8 @@ function da_display_download_attachments($post_id = 0, $args = array())
 	}
 	elseif($args['display_empty'] === 1)
 		$html .= $args['display_option_none'];
+	
+	$html .= $args['content_after'];
 
 	if(!($args['display_empty'] === 0 && $count === 0) && $args['container'] !== '')
 		$html .= '</'.$args['container'].'>';
