@@ -130,23 +130,26 @@ class Download_Attachments_Settings
 							<p class="inner">'.__('If you are having problems with this plugin, please talk about them in the', 'download-attachments').' <a href="http://www.dfactory.eu/support/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=support" target="_blank" title="'.__('Support forum', 'download-attachments').'">'.__('Support forum', 'download-attachments').'</a></p>
 							<hr/>
 							<h4 class="inner">'.__('Do you like this plugin?', 'download-attachments').'</h4>
-							<p class="inner"><a href="http://wordpress.org/support/view/plugin-reviews/download-attachments" target="_blank" title="'.__('Rate it 5', 'download-attachments').'">'.__('Rate it 5', 'download-attachments').'</a> '.__('on WordPress.org', 'download-attachments').'<br/>'.
-							__('Blog about it & link to the', 'download-attachments').' <a href="http://www.dfactory.eu/plugins/download-attachments/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=blog-about" target="_blank" title="'.__('plugin page', 'download-attachments').'">'.__('plugin page', 'download-attachments').'</a><br/>'.
-							__('Check out our other', 'download-attachments').' <a href="http://www.dfactory.eu/plugins/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=other-plugins" target="_blank" title="'.__('WordPress plugins', 'download-attachments').'">'.__('WordPress plugins', 'download-attachments').'</a>
-							</p>
 							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="inner">
 								<input type="hidden" name="cmd" value="_s-xclick">
 								<input type="hidden" name="hosted_button_id" value="5KXY2JTQXDQEG">
 								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 								<img alt="" border="0" src="https://www.paypalobjects.com/pl_PL/i/scr/pixel.gif" width="1" height="1">
 							</form>
+							<p class="inner"><a href="http://wordpress.org/support/view/plugin-reviews/download-attachments" target="_blank" title="'.__('Rate it 5', 'download-attachments').'">'.__('Rate it 5', 'download-attachments').'</a> '.__('on WordPress.org', 'download-attachments').'<br/>'.
+							__('Blog about it & link to the', 'download-attachments').' <a href="http://www.dfactory.eu/plugins/download-attachments/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=blog-about" target="_blank" title="'.__('plugin page', 'download-attachments').'">'.__('plugin page', 'download-attachments').'</a><br/>'.
+							__('Check out our other', 'download-attachments').' <a href="http://www.dfactory.eu/plugins/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=other-plugins" target="_blank" title="'.__('WordPress plugins', 'download-attachments').'">'.__('WordPress plugins', 'download-attachments').'</a>
+							</p>
 							<hr/>
 							<p class="df-link inner">'.__('Created by', 'download-attachments').' <a href="http://www.dfactory.eu/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=created-by" target="_blank" title="dFactory - Quality plugins for WordPress"><img src="'.DOWNLOAD_ATTACHMENTS_URL.'/images/logo-dfactory.png'.'" title="dFactory - Quality plugins for WordPress" alt="dFactory - Quality plugins for WordPress"/></a></p>
 						</div>
-					</div>
+					</div>';
+					/*
 					<div class="df-ads">
 						<a href="http://www.dfactory.eu/plugins/frontend-users/?utm_source=download-attachments-settings&utm_medium=link&utm_campaign=banner" target="_blank" title="Frontend Users by dFactory"><img src="'.DOWNLOAD_ATTACHMENTS_URL.'/images/ad-frontend-users.png'.'" alt="Frontend Users by dFactory" /></a>
 					</div>
+					*/
+		echo ' 
 				</div>
 				<form action="options.php" method="post">';
 

@@ -2,7 +2,7 @@
 /*
 Plugin Name: Download Attachments
 Description: Download Attachments is a new approach to managing downloads in WordPress. It allows you to easily add and display download links in any post or page.
-Version: 1.2.1
+Version: 1.2.2
 Author: dFactory
 Author URI: http://www.dfactory.eu/
 Plugin URI: http://www.dfactory.eu/plugins/download-attachments/
@@ -80,7 +80,7 @@ class Download_Attachments
 				'manage_download_attachments'
 			)
 		),
-		'version' => '1.2.1'
+		'version' => '1.2.2'
 	);
 
 
@@ -404,7 +404,7 @@ class Download_Attachments
 				)
 			);
 
-			wp_enqueue_media();
+			wp_enqueue_media(array('post' => (isset($post->ID) ? (int)$post->ID : 0)));
 			wp_enqueue_style('download-attachments-admin');
 			wp_enqueue_script('download-attachments-admin-post');
 			wp_enqueue_script('download-attachments-admin-stupid-table-sort');

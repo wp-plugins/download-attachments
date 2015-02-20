@@ -3,8 +3,8 @@ Contributors: dfactory
 Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.9
-Tested up to: 4.1.0
-Stable tag: 1.2.1
+Tested up to: 4.1.1
+Stable tag: 1.2.2
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -44,6 +44,7 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 * French - by Jean-Philippe Gurecki
 * German - by [Sascha Brendel](http://sascha-brendel.de/blog/)
 * Greek - by vas gargan
+* Hungarian - by Meszaros Tamas
 * Polish - by Bartosz Arendt
 * Russian - by Semion Zuev
 * Spanish - by [Cristian Sierra](http://www.truedacolor.com/)
@@ -56,7 +57,9 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 
 == Frequently Asked Questions ==
 
-No questions yet.
+= Q. I have a question =
+
+A. Chances are, someone else has asked it. Check out the support forum at: http://www.dfactory.eu/support/
 
 == Screenshots ==
 
@@ -65,6 +68,10 @@ No questions yet.
 3. screenshot-3.png
 
 == Changelog ==
+
+= 1.2.2 =
+* New: Hungarian translation, thanks to Meszaros Tamas
+* Tweak: Uploaded files are now attached to a post
 
 = 1.2.1 =
 * New: French translation, thanks to Jean-Philippe Gurecki
@@ -123,7 +130,6 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.2.1 =
-* New: French translation, thanks to Jean-Philippe Gurecki
-* Fix: Attachment title display html fix
-* Fix: Undefined notice index in admin and frontend
+= 1.2.2 =
+* New: Hungarian translation, thanks to Meszaros Tamas
+* Tweak: Uploaded files are now attached to the post
