@@ -4,7 +4,7 @@ Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.9
 Tested up to: 4.1.1
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -69,6 +69,9 @@ A. Chances are, someone else has asked it. Check out the support forum at: http:
 
 == Changelog ==
 
+= 1.2.3 =
+* Tweak: Option to pass post_id parameter to [download-attachments] shortcode
+
 = 1.2.2 =
 * New: Hungarian translation, thanks to Meszaros Tamas
 * Tweak: Uploaded files are now attached to a post
@@ -130,6 +133,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.2.2 =
-* New: Hungarian translation, thanks to Meszaros Tamas
-* Tweak: Uploaded files are now attached to the post
+= 1.2.3 =
+* Tweak: Option to pass post_id parameter to [download-attachments] shortcode

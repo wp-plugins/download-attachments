@@ -190,6 +190,7 @@ function da_display_download_attachments($post_id = 0, $args = array())
 		'include' => '',
 		'title' => __('Download Attachments', 'download-attachments'),
 		'title_container' => 'p',
+		'title_class' => 'download-title',
 		'orderby' => 'menu_order',
 		'order' => 'asc',
 		'echo' => 1
@@ -241,7 +242,7 @@ function da_display_download_attachments($post_id = 0, $args = array())
 
 		//title
 		if($args['title'] !== '')
-			$html .= ($args['title'] !== '' ? '<'.$args['title_container'].' class="download-title">'.$args['title'].'</'.$args['title_container'].'>' : '');
+			$html .= ($args['title'] !== '' ? '<'.$args['title_container'].' class="'.$args['title_class'].'">'.$args['title'].'</'.$args['title_container'].'>' : '');
 	}
 	
 	$html .= $args['content_before'];

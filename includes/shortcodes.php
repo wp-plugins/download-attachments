@@ -38,15 +38,15 @@ class Download_Attachments_Shortcodes
 	*/
 	public function download_attachments_shortcode($args)
 	{
-		$post_id = (int)(empty($post_id) ? get_the_ID() : $post_id);
-		
 		$defaults = array(
+			'post_id' => 0,
 			'container' => 'div',
 			'container_class' => 'download-attachments',
 			'container_id' => '',
 			'style' => isset($this->options['general']['display_style']) ? esc_attr($this->options['general']['display_style']) : 'list',
 			'link_before' => '',
 			'link_after' => '',
+			'display_index' => isset($options['frontend_columns']['index']) ? (int)$options['frontend_columns']['index'] : 0,
 			'display_user' => (int)$this->options['general']['frontend_columns']['author'],
 			'display_icon' => (int)$this->options['general']['frontend_columns']['icon'],
 			'display_count' => (int)$this->options['general']['frontend_columns']['downloads'],
@@ -60,6 +60,8 @@ class Download_Attachments_Shortcodes
 			'exclude' => '',
 			'include' => '',
 			'title' => __('Download Attachments', 'download-attachments'),
+			'title_container' => 'p',
+			'title_class' => 'download-title',
 			'orderby' => 'menu_order',
 			'order' => 'asc',
 			'echo' => 1
@@ -76,7 +78,15 @@ class Download_Attachments_Shortcodes
 			$args['title'] = $this->options['general']['label'];
 		}
 
-		return da_display_download_attachments($post_id, shortcode_atts($defaults, $args));
+		$args = shortcode_atts($defaults, $args);
+		
+		// reassign post id
+		$post_id = (int)(empty($args['post_id']) ? get_the_ID() : $args['post_id']);
+		
+		// unset from args
+		unset($args['post_id']);
+		
+		return da_display_download_attachments($post_id, $args);
 	}
 
 
