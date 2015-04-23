@@ -3,8 +3,8 @@ Contributors: dfactory
 Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.9
-Tested up to: 4.1.1
-Stable tag: 1.2.3
+Tested up to: 4.1.2
+Stable tag: 1.2.4
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -68,6 +68,9 @@ A. Chances are, someone else has asked it. Check out the support forum at: http:
 3. screenshot-3.png
 
 == Changelog ==
+
+= 1.2.4 =
+* New: da_get_download_attachment() function, to get complete single attachment data
 
 = 1.2.3 =
 * Tweak: Option to pass post_id parameter to [download-attachments] shortcode
@@ -133,5 +136,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.2.3 =
-* Tweak: Option to pass post_id parameter to [download-attachments] shortcode
+= 1.2.4 =
+* New: da_get_download_attachment() function, to get complete single attachment data

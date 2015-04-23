@@ -1,6 +1,13 @@
 <?php
 if(!defined('ABSPATH'))	exit;
 
+/**
+ * Get download attachments data for a given post
+ * 
+ * @param 	int $post_id
+ * @param	array $args
+ * @return 	array
+ */
 function da_get_download_attachments($post_id = 0, $args = array())
 {
 	$post_id = (int)(empty($post_id) ? get_the_ID() : $post_id);
@@ -101,7 +108,7 @@ function da_get_download_attachments($post_id = 0, $args = array())
 	if(!empty($args['include']))
 	{
 		$files_data = get_posts(
-			array(
+			apply_filters('da_get_download_attachments_args', array(
 				'include' => $args['include'],
 				'posts_per_page' => -1,
 				'offset' => 0,
@@ -109,7 +116,7 @@ function da_get_download_attachments($post_id = 0, $args = array())
 				'order' => 'DESC',
 				'post_type' => 'attachment',
 				'post_status' => 'any'
-			)
+			))
 		);
 
 		if(!empty($files_data))
@@ -155,11 +162,20 @@ function da_get_download_attachments($post_id = 0, $args = array())
 		$files[$key]['attachment_date'] = date_i18n(get_option('date_format').' '.get_option('time_format'), strtotime($row['attachment_date']));
 		$files[$key]['attachment_size'] = size_format($row['attachment_size']);
 	}
+	
+	// backward compatibility
+	$files = apply_filters('da_get_attachments', $files);
 
-	return apply_filters('da_get_attachments', $files);
+	return apply_filters('da_get_download_attachments', $files, $post_id, $args);
 }
 
-
+/**
+ * Display download attachments for a given post
+ * 
+ * @param 	int $post_id
+ * @param	array $args
+ * @return 	mixed
+ */
 function da_display_download_attachments($post_id = 0, $args = array())
 {
 	$post_id = (int)(empty($post_id) ? get_the_ID() : $post_id);
@@ -256,7 +272,7 @@ function da_display_download_attachments($post_id = 0, $args = array())
 			$item_container = 'span';
 			$html .= '<ul>';
 		}
-		elseif($args['style'] === 'table')
+		else
 		{
 			$item_container = 'td';
 			
@@ -393,8 +409,14 @@ function da_display_download_attachments($post_id = 0, $args = array())
 		return apply_filters('da_display_attachments', $html);
 }
 
-
-function da_download_attachment_link($attachment_id = 0, $display = false)
+/**
+ * Get single attachment download link
+ * 
+ * @param 	int $attachment_id
+ * @param	bool $echo
+ * @return 	mixed
+ */
+function da_download_attachment_link($attachment_id = 0, $echo = false)
 {
 	if(get_post_type($attachment_id) === 'attachment')
 	{
@@ -406,13 +428,18 @@ function da_download_attachment_link($attachment_id = 0, $display = false)
 	else
 		$link = '';
 
-	if($display === true)
+	if($echo === true)
 		echo apply_filters('da_download_attachment_link', $link);
 	else
 		return apply_filters('da_download_attachment_link', $link);
 }
 
-
+/**
+ * Get single attachment download url
+ * 
+ * @param 	int $attachment_id
+ * @return 	mixed
+ */
 function da_download_attachment_url($attachment_id = 0)
 {
 	if(get_post_type($attachment_id) === 'attachment')
@@ -425,7 +452,50 @@ function da_download_attachment_url($attachment_id = 0)
 		return '';
 }
 
+/**
+ * Get single attachment download data
+ * 
+ * @param 	int $attachment_id
+ * @return 	array
+ */
+function da_get_download_attachment($attachment_id = 0)
+{
+	$attachment_id = !empty($attachment_id) ? absint($attachment_id) : 0;
+	
+	// break if there's no attachment ID given
+	if(empty($attachment_id))
+		return false;
+	
+	// break if given ID is not for attachment
+	if(get_post_type($attachment_id) != 'attachment')
+		return false;
 
+	$options = get_option('download_attachments_general');
+	
+	$file = get_post($attachment_id);
+	$filename = get_attached_file($attachment_id);
+	$filetype = wp_check_filetype($filename);
+	$extension = ($filetype['ext'] === 'jpeg' ? 'jpg' : $filetype['ext']);
+	
+	$attachment['title'] = get_the_title($attachment_id);
+	$attachment['caption'] = trim(esc_attr($file->post_excerpt));
+	$attachment['description'] = trim(esc_attr($file->post_content));
+	$attachment['date'] = date_i18n(get_option('date_format').' '.get_option('time_format'), strtotime($file->post_date));
+	$attachment['size'] = size_format((file_exists($filename) ? filesize($filename) : 0));
+	$attachment['type'] = $extension;
+	$attachment['downloads'] = (int)get_post_meta($attachment_id, '_da_downloads', true);
+	$attachment['url'] = ($options['pretty_urls'] === true ? site_url('/'.$options['download_link'].'/'.$attachment_id.'/') : plugins_url('download-attachments/includes/download.php?id='.$attachment_id));
+	$attachment['icon_url'] = (file_exists(DOWNLOAD_ATTACHMENTS_PATH.'images/ext/'.$extension.'.gif') ? DOWNLOAD_ATTACHMENTS_URL.'/images/ext/'.$extension.'.gif' : DOWNLOAD_ATTACHMENTS_URL.'/images/ext/unknown.gif');
+	
+	return apply_filters('da_get_download_attachment', $attachment, $attachment_id);
+}
+
+/**
+ * Process attachment download function
+ * 
+ * @param 	int $attachment_id
+ * @return 	mixed
+ */
 function da_download_attachment($attachment_id = 0)
 {
 	if(get_post_type($attachment_id) === 'attachment')
@@ -433,6 +503,8 @@ function da_download_attachment($attachment_id = 0)
 		$uploads = wp_upload_dir();
 		$attachment = get_post_meta($attachment_id, '_wp_attached_file', true);
 		$filepath = $uploads['basedir'].'/'.$attachment;
+		
+		$filepath = apply_filters('da_download_attachment_filepath', $filepath, $attachment_id);
 
 		if(!file_exists($filepath) || !is_readable($filepath))
 			return false;
