@@ -3,8 +3,8 @@ Contributors: dfactory
 Donate link: http://www.dfactory.eu/
 Tags: attachment, attachments, file, files, download, downloads, download manager, download monitor, download count, hits, file manager, upload, doc, document, documents, pdf, zip
 Requires at least: 3.9
-Tested up to: 4.1.2
-Stable tag: 1.2.4
+Tested up to: 4.2
+Stable tag: 1.2.5
 License: MIT License
 License URI: http://opensource.org/licenses/MIT
 
@@ -45,9 +45,14 @@ For more information, check out plugin page at [dFactory](http://www.dfactory.eu
 * German - by [Sascha Brendel](http://sascha-brendel.de/blog/)
 * Greek - by vas gargan
 * Hungarian - by Meszaros Tamas
+* Italian - by Enzo Costantini
 * Polish - by Bartosz Arendt
 * Russian - by Semion Zuev
 * Spanish - by [Cristian Sierra](http://www.truedacolor.com/)
+
+= Get involved =
+
+Feel free to contribute to the source code on the [dFactory GitHub Repository](https://github.com/dfactoryplugins).
 
 == Installation ==
 
@@ -68,6 +73,9 @@ A. Chances are, someone else has asked it. Check out the support forum at: http:
 3. screenshot-3.png
 
 == Changelog ==
+
+= 1.2.5 =
+* New: Italian translation, thanks to Enzo Costantini
 
 = 1.2.4 =
 * New: da_get_download_attachment() function, to get complete single attachment data
@@ -136,5 +144,5 @@ Initial release
 
 == Upgrade Notice ==
 
-= 1.2.4 =
-* New: da_get_download_attachment() function, to get complete single attachment data
+= 1.2.5 =
+* New: Italian translation, thanks to Enzo Costantini
